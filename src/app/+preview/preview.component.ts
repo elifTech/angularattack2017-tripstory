@@ -18,6 +18,9 @@ export class PreviewComponent implements OnInit {
 
   public scroller: PathScroller;
 
+  private sections: any;
+  private sectionsBounds: any;
+
   public ngOnInit() {
     const pathPieces = [
       {
@@ -220,34 +223,43 @@ export class PreviewComponent implements OnInit {
         }
       ]
     };
+
+    this.sections = Array.from(document.querySelectorAll('.point'));
+    this.sectionsBounds = this.sections.map(section => {
+      const bounds = section.getBoundingClientRect();
+      return {
+        top:bounds.top,
+        bottom:bounds.bottom,
+        left:bounds.left,
+        right:bounds.right,
+        height:bounds.height,
+        width:bounds.width,
+      }
+    });
   }
 
   public onWindowScroll(event) {
-    function getPageHeight() {
-      const body = document.body,
-        html = document.documentElement;
-
-      const height = Math.max( body.scrollHeight, body.offsetHeight,
-        html.clientHeight, html.scrollHeight, html.offsetHeight );
-
-      return height;
-    }
-
-    function getWindowHeight() {
-      const w = window,
-        d = document,
-        e = d.documentElement,
-        g = d.getElementsByTagName('body')[0],
-//                x = w.innerWidth || e.clientWidth || g.clientWidth,
-        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-
-      return y;
-    }
-
     const scrollTop = document.body.scrollTop;
-    const pageHeight = getPageHeight() - getWindowHeight();
-    const fraction = scrollTop / pageHeight * 100;
+    let currentSectionIndex;
+    let currentSection;
+    let fraction;
+    this.sectionsBounds.forEach((item, index) => {
+      // console.log(`${index}: item.top: ${item.top}, item.bottom: ${item.top + item.height}, scrollTop: ${scrollTop}`);
+      if (scrollTop >= (item.top) && scrollTop <= (item.top + item.height)) {
+        currentSectionIndex = index;
+        //  - this.sectionsBounds[0].topg
+      }
+    });
 
-    this.scroller.moveMarker(fraction);
+    if (currentSectionIndex !== undefined) {
+      currentSection = this.sectionsBounds[currentSectionIndex];
+      fraction = (scrollTop) / (currentSection.top + currentSection.height) * 100;
+    }
+
+    console.log(`currentSectionIndex: ${currentSectionIndex}, fraction: ${fraction}`);
+
+    if (currentSectionIndex !== undefined && fraction) {
+      this.scroller.pathSegments[currentSectionIndex].moveMarker(fraction);
+    }
   }
 }

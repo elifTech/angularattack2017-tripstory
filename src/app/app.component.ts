@@ -41,10 +41,6 @@ import {ITokenUser} from './interfaces';
     <main>
       <router-outlet></router-outlet>
     </main>
-
-    <footer>
-      <span>Made in Ukraine</span>
-    </footer>
   `
 })
 export class AppComponent implements OnInit {

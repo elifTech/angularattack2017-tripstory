@@ -22,7 +22,7 @@ import { ITokenUser } from './interfaces';
     './app.component.css'
   ],
   template: `
-    <nav>
+    <!--nav>
       <a [routerLink]=" ['./'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
         Home
@@ -36,7 +36,7 @@ import { ITokenUser } from './interfaces';
         Create new story
       </a>
        <a href="" (click)="logout()">Logout</a>
-    </nav>
+    </nav-->
 
     <main>
       <router-outlet></router-outlet>

@@ -14,6 +14,10 @@ import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+
 import {Ng2UiAuthModule} from 'ng2-ui-auth';
 import {MyAuthConfig} from './config';
 
@@ -61,7 +65,8 @@ type StoreType = {
     XLargeDirective
   ],
   imports: [ // import Angular's modules
-    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),

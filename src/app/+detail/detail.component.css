@@ -1,0 +1,37 @@
+.addPlacesContainer {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.places, .options {
+  width: 50%;
+}
+
+.addPlaceBtnContainer {
+  height: 4rem;
+  margin-left: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.addPlacesContainer md-list-item {
+  border: 1px solid gray;
+  -webkit-border-radius:;
+  -moz-border-radius:;
+  border-radius: 2px;
+  cursor: pointer;
+  padding-left: 1.5rem;
+  margin-bottom: .3rem;
+}
+
+.addPlacesContainer md-list-item:hover {
+  background-color: lightgray;
+}
+
+.options {
+  padding: 1.5rem 2rem;
+}
+
+

@@ -12,14 +12,27 @@ console.log('`Detail` component loaded asynchronously');
 
 @Component({
   selector: 'detail',
+  styleUrls: [
+    './detail.component.css'
+  ],
   template: `
-    <h1>Hello from Detail</h1>
-    <span>
-      <a [routerLink]=" ['./child-detail'] ">
-        Child Detail
-      </a>
-    </span>
-    <router-outlet></router-outlet>
+    <div class="addPlacesContainer">
+      <div class="places">
+        <div class="addPlaceBtnContainer">
+          <button md-button color="primary">Add place</button>
+        </div>      
+        <md-list>
+         <md-list-item> Pepper </md-list-item>
+         <md-list-item> Salt </md-list-item>
+         <md-list-item> Paprika </md-list-item>
+        </md-list>
+      </div>
+      <div class="options">
+        <div>
+          <place-form></place-form>
+        </div>
+      </div>
+    </div>
   `,
 })
 export class DetailComponent implements OnInit {

@@ -5,6 +5,8 @@
 
 body {
   // background-color: #f4f9ff;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 
 nav {
@@ -21,4 +23,93 @@ nav a {
   text-align: center;
   text-decoration: none;
   border-radius: 4px;
+}
+
+
+
+.logo {
+  background: url('../assets/img/logo.png');
+  background-position: 277px 99px;
+  width: 277px;
+  height: 99px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+.pulse-button {
+  position: relative;
+  top: -5px;
+  left: 71px;
+  display: block;
+  width: 7px;
+  height: 7px;
+
+  border-style: solid;
+  border-width: 7px;
+  border-color: #05b1e2;
+  background-color: rgb(196, 237, 248);
+
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(#05b1e2, 0.3);
+  -webkit-animation: pulse 1.5s infinite;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(#05b1e2, 0.3);
+    -webkit-animation: pulse 1.5s infinite;
+  }
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -moz-transform: scale(0.6);
+    -ms-transform: scale(0.6);
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+  }
+  70% {
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    box-shadow: 0 0 0 29px rgba(90, 153, 212, 0);
+  }
+  100% {
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
+  }
+}
+
+.created-by {
+  margin: 0 auto;
+  width: 470px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 46px;
+  color: #666;
+}
+
+.eliftech {
+  display: inline-block;
+  background: url('../assets/img/eliftech.png');
+  background-size: 142px 46px;
+  vertical-align: middle;
+  width: 142px;
+  height: 46px;
+  overflow: hidden;
+  text-indent: -100%;
+  margin-top: -8px;
+  margin-left: 5px;
 }

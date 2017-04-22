@@ -171,7 +171,7 @@ export class PreviewComponent implements OnInit {
 
     const startPoint = pathPieces[0].path[0];
     var myOptions = {
-      zoom: 5,
+      zoom: 8,
       center: startPoint,
       scrollwheel: false,
       navigationControl: false,

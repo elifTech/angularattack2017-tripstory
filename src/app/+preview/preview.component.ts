@@ -4,6 +4,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import {IStory, EPathSegmentType, ETravelModeType} from "../interfaces";
 
 @Component({
   selector: 'preview',
@@ -13,7 +14,7 @@ import {
   ]
 })
 export class PreviewComponent implements OnInit {
-  public story:any;
+  public story:IStory;
 
   public ngOnInit() {
 
@@ -24,9 +25,13 @@ export class PreviewComponent implements OnInit {
 
       path: [
         {
-          type: 'poi',
+          type: EPathSegmentType.POINT_OF_INTEREST,
           location: {
-            title: 'REYKJAVÍK'
+            title: 'REYKJAVÍK',
+            point: {
+              lat: 55.5,
+              lng: 34.2
+            }
           },
           story: {
             title: 'The Adventure Begins',
@@ -34,7 +39,16 @@ export class PreviewComponent implements OnInit {
           }
         },
         {
-          type: 'road',
+          type: EPathSegmentType.ROAD,
+          travelType: ETravelModeType.WALKING,
+          start: {
+            lat: 55.5,
+            lng: 34.2
+          },
+          end: {
+            lat: 56.5,
+            lng: 35.2
+          }
         }
       ]
     };

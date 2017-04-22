@@ -6,7 +6,10 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
+import {JwtHttp, AuthService} from 'ng2-ui-auth';
+import {Router} from '@angular/router';
 import { AppState } from './app.service';
+import {ITokenUser} from './interfaces';
 
 /*
  * App Component
@@ -40,6 +43,7 @@ import { AppState } from './app.service';
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
         About
       </a>
+       <a href="" (click)="logout()">Logout</a>
     </nav>
 
     <main>
@@ -59,24 +63,32 @@ import { AppState } from './app.service';
   `
 })
 export class AppComponent implements OnInit {
+  user: ITokenUser;
+  expiration: Date;
+
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
   public name = 'Angular 2 Webpack Starter';
   public url = 'https://twitter.com/AngularClass';
 
   constructor(
-    public appState: AppState
+    public appState: AppState,
+    private http: JwtHttp,
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+    this.user = this.auth.getPayload();
+    this.expiration = this.auth.getExpirationDate();
+
+    console.log('Initial App State', this.appState.state, this.user);
   }
 
+  logout() {
+    this.auth.logout()
+      .subscribe({
+        error: (err: any) => console.error(err),
+        complete: () => this.router.navigateByUrl('login')
+      });
+  }
 }
-
-/*
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */

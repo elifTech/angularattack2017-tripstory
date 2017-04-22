@@ -15,9 +15,9 @@ const URL = `${API_URL}/api/upload`;
 })
 export class PlaceFormComponent {
   private model = new Place('Lviv', 'photo', 'Opera House', 'Long, long time ago...');
-  public hasBaseDropZoneOver:boolean = false;
+  public hasBaseDropZoneOver: boolean = false;
 
-  public uploader:FileUploader = new FileUploader({url: URL});
+  public uploader: FileUploader = new FileUploader({url: URL});
 
   public ngOnInit() {
     this.uploader.onAfterAddingAll = (items) => {
@@ -27,7 +27,7 @@ export class PlaceFormComponent {
     }
   }
 
-  public fileOverBase(e:any):void {
+  public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
 }

@@ -17,4 +17,49 @@
   position: relative;
   z-index: 2;
   background: rgba(255, 255, 255, .8);
+  & > .text {
+    padding: 100px 50px 50px 100px;
+    font-size: 1.25em;
+    line-height: 1.7;
+
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-weight: 300;
+  }
+
+  .subheader {
+    margin-top: 100px;
+    font-family: 'Montserrat', cursive;
+    text-transform: uppercase;
+    font-size: 22px;
+    color: #787890;
+  }
+  h2 {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 62px;
+    font-weight: normal;
+    color: #787890;
+    margin: 0;
+  }
+
+  .text-intro {
+    font-size: 1.3em;
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0.5em 0 1.25em;
+    text-align: left;
+    color: #9d9c95;
+  }
+  figure {
+    margin: 1em 0 2em;
+    img {
+      max-width: 100%;
+    }
+    figcaption {
+      font-size: 0.85em;
+      font-style: italic;
+      padding: 1em 1.5em 0;
+      text-align: center;
+      color: #5f646c;
+    }
+  }
 }

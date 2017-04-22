@@ -38,9 +38,10 @@ export class PathScroller {
     });
     Promise.all(pathSegments)
       .then(polylines => {
-        const pathLengths = polylines.map(
-          polyline => Math.round(google.maps.geometry.spherical.computeLength(polyline.getPath().getArray()))
-        );
+        const pathLengths = polylines.map((polyline) => {
+          const path:any = polyline;
+          return Math.round(google.maps.geometry.spherical.computeLength(path.getPath().getArray()))
+        });
         this.polylines = polylines;
         this.pathLengths = pathLengths;
       });

@@ -19,6 +19,8 @@ export class PreviewComponent implements OnInit {
 
   public ngOnInit() {
 
+    console.info(google);
+    if (google) {
     const pathPieces = [
       {type: 'walking', path: [new google.maps.LatLng(36.966667, 22.716667), new google.maps.LatLng(37.966667, 23.716667)]},
       {type: 'plane', path: [new google.maps.LatLng(37.966667, 23.716667), new google.maps.LatLng(36.966667, 22.716667)]},
@@ -26,17 +28,16 @@ export class PreviewComponent implements OnInit {
     ];
 
     const startPoint = pathPieces[0].path[0];
+      var myOptions = {
+        zoom: 5,
+        center: startPoint,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
 
-    var myOptions = {
-      zoom: 5,
-      center: startPoint,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+      const map = new google.maps.Map(document.getElementById("map"), myOptions);
 
-    const map = new google.maps.Map(document.getElementById("map"), myOptions);
-
-    const scroller = new PathScroller(map, pathPieces);
-
+      const scroller = new PathScroller(map, pathPieces);
+    }
     this.story = {
       title: 'The Wild Path',
       subheader: 'AN ICELANDIC ADVENTURE',

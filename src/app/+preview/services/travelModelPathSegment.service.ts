@@ -37,16 +37,25 @@ export class TravelModelPathSegment extends PathSegment {
 
           const polyline = new google.maps.Polyline({
             path: [],
-            strokeColor: '#FFFF00',
-            strokeWeight: 3
+            strokeOpacity: 0,
+            map: this.map,
+            icons: [{
+              icon: {
+                path: 'M 0,-1 0,1',
+                strokeOpacity: 0.5,
+                scale: 2
+              },
+              offset: '0',
+              repeat: '20px'
+            }],
           });
 
           // For each route, display summary information.
           const legs = route.legs;
 
-          this.directionDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-          this.directionDisplay.setMap(this.map);
-          this.directionDisplay.setDirections(response);
+          // this.directionDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+          // this.directionDisplay.setMap(this.map);
+          // this.directionDisplay.setDirections(response);
 
           // Markers
           for (let i = 0; i < legs.length; i++) {

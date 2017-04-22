@@ -72,6 +72,8 @@ export class PathScroller {
       pos = this.pathLengths[currPolylineIndex - 1];
     }
 
+    // console.log(`pos: ${pos}, passedDistance: ${passedDistance}, currPolylineIndex: ${currPolylineIndex}`);
+
     const polyline = this.polylines[currPolylineIndex - 1];
     const p = polyline.GetPointAtDistance(pos);
     this.marker.setPosition(p);
@@ -80,6 +82,24 @@ export class PathScroller {
     const pathType = this.pathPieces[currPolylineIndex - 1].type;
 
     this.marker.setIcon(this.icons[pathType]);
+
+
+    const segmentTypeInstance = PathScroller.getPathSegmentTypeInstance(pathType);
+
+    const tempPath = [this.pathPieces[currPolylineIndex - 1].path[0], p];
+
+    if (this.tempPolyline) {
+      // this.tempPolyline.setMap(null);
+      this.tempPolyline.polyline = null;
+      this.tempPolyline = null;
+    }
+
+    this.tempPolyline = new segmentTypeInstance(this.map, tempPath);
+    this.tempPolyline.route
+        .then(tempPolylineRoute => {
+          tempPolylineRoute.setOptions({strokeOpacity: 0.5, strokeColor: 'green'});
+          // this.tempPolyline.setMap(this.map);
+        });
   }
 
   protected static getPathSegmentTypeInstance(type) {

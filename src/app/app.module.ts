@@ -14,18 +14,21 @@ import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
+import {Ng2UiAuthModule} from 'ng2-ui-auth';
+import {MyAuthConfig} from './config';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
+import { ROUTES, ROUTER_PROVIDERS } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
+import { LoginComponent } from './login';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
@@ -52,6 +55,7 @@ type StoreType = {
   declarations: [
     AppComponent,
     AboutComponent,
+    LoginComponent,
     HomeComponent,
     NoContentComponent,
     XLargeDirective
@@ -60,11 +64,13 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    Ng2UiAuthModule.forRoot(MyAuthConfig)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    ROUTER_PROVIDERS
   ]
 })
 export class AppModule {

@@ -1,9 +1,12 @@
-export var google: any;
-
 import { PlanePathSegment } from './planePathSegment.service';
 import { FerryPathSegment } from './ferryPathSegment.service';
 import { DrivingModelPathSegment } from './drivingModelPathSegment.service';
 import { WalkingModelPathSegment } from './walkingModelPathSegment.service';
+
+import walkingIcon from '../icons/walking.png';
+import planeIcon from '../icons/plane.png';
+import drivingIcon from '../icons/driving.png';
+import ferryIcon from '../icons/ferry.png';
 
 export class PathScroller {
   protected pathLength: number;
@@ -12,13 +15,13 @@ export class PathScroller {
   protected marker: any;
   protected icons: any;
 
-  constructor(public map:any, public pathPieces:Array<any>) {
+  constructor(public map: any, public pathPieces: Array<any>) {
 
     this.icons = { // make this static
-      walking: 'walking.png',
-      plane: 'plane.png',
-      driving: 'driving.png',
-      ferry: 'ferry.png',
+      walking: walkingIcon,
+      plane: planeIcon,
+      driving: drivingIcon,
+      ferry: ferryIcon,
     };
   }
 
@@ -27,7 +30,6 @@ export class PathScroller {
       map: this.map
     });
     this.initRoutes();
-    this.pathLength = 0;
   }
 
   public initRoutes() {
@@ -39,7 +41,7 @@ export class PathScroller {
     Promise.all(pathSegments)
       .then(polylines => {
         const pathLengths = polylines.map((polyline) => {
-          const path:any = polyline;
+          const path: any = polyline;
           return Math.round(google.maps.geometry.spherical.computeLength(path.getPath().getArray()))
         });
         this.polylines = polylines;
@@ -48,8 +50,10 @@ export class PathScroller {
   }
 
   moveMarker(fraction) {
+    if (!this.pathLengths) {
+      return;
+    }
     const totalLength = this.pathLengths.reduce((a, b) => a + b, 0);
-    console.log(totalLength);
     // const pathLength = this.pathLengths;
     const totalPos = totalLength * fraction / 100;
 
@@ -64,7 +68,6 @@ export class PathScroller {
     if (currPolylineIndex <= 0) { // this is bad thing, but i dunno how to fix it(
       currPolylineIndex = 1;
     }
-    console.log(`totalLength: ${totalLength}, totalPos: ${totalPos}, pos: ${pos}, passedDistance: ${passedDistance}, currPolylineIndex: ${currPolylineIndex - 1}`);
     if (pos > passedDistance) { // this is bad thing, but i dunno how to fix it(
       pos = this.pathLengths[currPolylineIndex - 1];
     }

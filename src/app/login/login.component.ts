@@ -1,9 +1,9 @@
-import {AuthService} from 'ng2-ui-auth';
+import { AuthService } from 'ng2-ui-auth';
 import {
   Component,
   OnInit
 } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
-  loginWithFacebook() {
+  public loginWithFacebook() {
     this.auth.authenticate('facebook')
       .subscribe({
         error: (err: any) => console.error(err),
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  loginWithGoogle() {
+  public loginWithGoogle() {
     this.auth.authenticate('google')
       .subscribe({
         error: (err: any) => console.error(err),

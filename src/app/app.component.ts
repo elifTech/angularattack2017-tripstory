@@ -6,10 +6,10 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import {JwtHttp, AuthService} from 'ng2-ui-auth';
-import {Router} from '@angular/router';
+import { JwtHttp, AuthService } from 'ng2-ui-auth';
+import { Router } from '@angular/router';
 import { AppState } from './app.service';
-import {ITokenUser} from './interfaces';
+import { ITokenUser } from './interfaces';
 
 /*
  * App Component
@@ -44,19 +44,18 @@ import {ITokenUser} from './interfaces';
   `
 })
 export class AppComponent implements OnInit {
-  user: ITokenUser;
-  expiration: Date;
+  public user: ITokenUser;
+  public expiration: Date;
 
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
   public name = 'Angular 2 Webpack Starter';
   public url = 'https://twitter.com/AngularClass';
 
-  constructor(
-    public appState: AppState,
-    private http: JwtHttp,
-    private router: Router,
-    private auth: AuthService
-  ) {}
+  constructor(public appState: AppState,
+              private http: JwtHttp,
+              private router: Router,
+              private auth: AuthService) {
+  }
 
   public ngOnInit() {
     this.user = this.auth.getPayload();
@@ -65,7 +64,7 @@ export class AppComponent implements OnInit {
     console.log('Initial App State', this.appState.state, this.user);
   }
 
-  logout() {
+  public logout() {
     this.auth.logout()
       .subscribe({
         error: (err: any) => console.error(err),

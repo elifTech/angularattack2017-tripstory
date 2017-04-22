@@ -1,8 +1,7 @@
-export var google: any;
 import { PathSegment } from './pathSegment.service';
 
 export class PlanePathSegment extends PathSegment {
-  constructor(public map:any, public path:string) {
+  constructor(public map: any, public path: string) {
     super(map, path);
   }
 

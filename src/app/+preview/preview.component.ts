@@ -1,13 +1,15 @@
-import { WalkingModelPathSegment } from './services/walkingModelPathSegment.service';
+export var google: any;
 
 import {
   Component,
   OnInit,
 } from '@angular/core';
+import { PathScroller } from './services/pathScroller.service';
 
 @Component({
   selector: 'preview',
   templateUrl: './preview.component.html',
+  host: {'(window:scroll)': 'onWindowScroll($event)'},
   styleUrls: [
     './preview.component.scss'
   ]
@@ -17,7 +19,24 @@ export class PreviewComponent implements OnInit {
 
   public ngOnInit() {
 
-    new WalkingModelPathSegment(null, '');
+    const pathPieces = [
+      {type: 'walking', path: [new google.maps.LatLng(36.966667, 22.716667), new google.maps.LatLng(37.966667, 23.716667)]},
+      {type: 'plane', path: [new google.maps.LatLng(37.966667, 23.716667), new google.maps.LatLng(36.966667, 22.716667)]},
+      {type: 'driving', path: [new google.maps.LatLng(36.966667, 22.716667), new google.maps.LatLng(36.866667, 22.616667)]},
+    ];
+
+    const startPoint = pathPieces[0].path[0];
+
+    var myOptions = {
+      zoom: 5,
+      center: startPoint,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    const map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    const scroller = new PathScroller(map, pathPieces);
+
     this.story = {
       title: 'The Wild Path',
       subheader: 'AN ICELANDIC ADVENTURE',
@@ -42,4 +61,7 @@ export class PreviewComponent implements OnInit {
     console.log('hello `Barrel` component');
   }
 
+  public onWindowScroll(event) {
+    console.info('scroll', event);
+  }
 }

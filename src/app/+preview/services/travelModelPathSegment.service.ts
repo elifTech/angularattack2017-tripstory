@@ -2,13 +2,12 @@ export var google: any;
 
 import { ETravelModeType } from '../../interfaces';
 import { PathSegment } from './pathSegment.service';
-import { ETravelModeType } from '../../interfaces';
 
 export class TravelModelPathSegment extends PathSegment {
   public polyline:any;
   public directionDisplay:any;
 
-  constructor(public map:google.maps.Map, public path:string, public travelMode:ETravelModeType) {
+  constructor(public map:any, public path:string, public travelMode:ETravelModeType) {
     super(map, path);
 
     this.polyline = null;
@@ -36,8 +35,8 @@ export class TravelModelPathSegment extends PathSegment {
         if (status == google.maps.DirectionsStatus.OK){
           const bounds = new google.maps.LatLngBounds();
           const route = response.routes[0];
-          let startLocation = {};
-          let endLocation = {};
+          let startLocation:any = {};
+          let endLocation:any = {};
 
           const polyline = new google.maps.Polyline({
             path: [],

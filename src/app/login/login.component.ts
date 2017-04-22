@@ -25,4 +25,12 @@ export class LoginComponent implements OnInit {
         complete: () => this.router.navigateByUrl('home')
       });
   }
+
+  loginWithGoogle() {
+    this.auth.authenticate('google')
+      .subscribe({
+        error: (err: any) => console.error(err),
+        complete: () => this.router.navigateByUrl('home')
+      });
+  }
 }

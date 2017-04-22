@@ -16,6 +16,7 @@ export const ROUTES: Routes = [
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
   { path: 'detail', loadChildren: './+detail#DetailModule'},
   { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
+  { path: 'preview', loadChildren: './+preview#PreviewModule'},
   { path: 'login', component: LoginComponent },
   { path: '**',    component: NoContentComponent },
 ];

@@ -1,11 +1,25 @@
 export var google: any;
 
+import { PlanePathSegment } from './planePathSegment.service';
+import { FerryPathSegment } from './ferryPathSegment.service';
+import { DrivingModelPathSegment } from './drivingModelPathSegment.service';
+import { WalkingModelPathSegment } from './walkingModelPathSegment.service';
+
 export class PathScroller {
   protected pathLength: number;
   protected polylines: any;
   protected pathLengths: any;
   protected marker: any;
+  protected icons: any;
+
   constructor(public map:any, public pathPieces:Array<any>) {
+
+    this.icons = { // make this static
+      walking: 'walking.png',
+      plane: 'plane.png',
+      driving: 'driving.png',
+      ferry: 'ferry.png',
+    };
   }
 
   public init() {
@@ -18,8 +32,8 @@ export class PathScroller {
 
   public initRoutes() {
     const pathSegments = this.pathPieces.map(item => {
-      const SegmentTypeInstance = this.getPathSegmentTypeInstance(item.type);
-      const pathSegment = new SegmentTypeInstance({ path: item.path, map: this.map });
+      const SegmentTypeInstance = PathScroller.getPathSegmentTypeInstance(item.type);
+      const pathSegment = new SegmentTypeInstance(this.map, item.path);
       return pathSegment.route;
     });
     Promise.all(pathSegments)
@@ -56,14 +70,14 @@ export class PathScroller {
 
     const polyline = this.polylines[currPolylineIndex - 1];
     const p = polyline.GetPointAtDistance(pos);
-    marker.setPosition(p);
+    this.marker.setPosition(p);
 
     const pathType = this.pathPieces[currPolylineIndex - 1].type;
 
-    marker.setIcon(this.icons[pathType]);
+    this.marker.setIcon(this.icons[pathType]);
   }
 
-  getPathSegmentTypeInstance(type) {
+  protected static getPathSegmentTypeInstance(type) {
     switch (type) {
       case 'plane':
         return PlanePathSegment;

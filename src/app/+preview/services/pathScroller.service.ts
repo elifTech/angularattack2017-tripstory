@@ -75,6 +75,7 @@ export class PathScroller {
     const polyline = this.polylines[currPolylineIndex - 1];
     const p = polyline.GetPointAtDistance(pos);
     this.marker.setPosition(p);
+    this.map.setCenter(p);
 
     const pathType = this.pathPieces[currPolylineIndex - 1].type;
 

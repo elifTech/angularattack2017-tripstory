@@ -40,7 +40,6 @@ import { StoriesComponent } from './stories';
 import { NewStoriesComponent } from './stories/new';
 import { EditStoriesComponent } from './stories/edit';
 import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -69,8 +68,7 @@ type StoreType = {
     StoriesComponent,
     NewStoriesComponent,
     EditStoriesComponent,
-    NoContentComponent,
-    XLargeDirective
+    NoContentComponent
   ],
   imports: [ // import Angular's modules
     MdGridListModule,

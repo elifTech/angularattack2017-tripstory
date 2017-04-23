@@ -20,11 +20,13 @@
       </div>
     </div>
 
-  <div *ngFor="let story of storyList">
-    {{story.title}}
-  </div>
+    <div class="stories-container">
+      <div *ngFor="let story of storyList">
+        {{story.title}}
+      </div>
 
-  <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
+    </div>
 
   </div>
 

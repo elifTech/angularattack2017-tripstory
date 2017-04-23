@@ -1,6 +1,9 @@
 <div class="edit-stories">
 
   <div class="main">
+
+    <a [routerLink]="['/preview/' + model._id]" target="_blank" class="preview-button">Preview</a>
+
     <span class="image-container">
       <img src="{{coverPhoto}}" />
       </span>

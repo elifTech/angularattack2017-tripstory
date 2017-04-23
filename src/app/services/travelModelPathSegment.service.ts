@@ -23,7 +23,7 @@ export class TravelModelPathSegment extends PathSegment {
       destination: this.path[1],
       travelMode: ETravelModeType[this.travelMode]
     };
-
+    
     return new Promise((resolve, reject) => {
       const rendererOptions = {
         map: this.map,

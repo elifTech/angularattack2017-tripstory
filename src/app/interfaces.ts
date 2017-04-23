@@ -72,6 +72,8 @@ export interface IStory {
   description?: string;
   subheader?: string;
   coverPhoto?: string;
+  backTitle?: string;
+  backSubheader?: string;
 
   startPoint?: IPathSegmentLocation,
   endPoint?: IPathSegmentLocation,

@@ -25,10 +25,6 @@ export class StoriesComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.storyRes.query().subscribe((stories: IStory[]) => {
-       this.storyList = stories;
-    });
-
     const mapStyle = [
       {
         "featureType": "administrative",
@@ -118,8 +114,6 @@ export class StoriesComponent implements OnInit {
       scrollwheel: false,
       navigationControl: false,
       mapTypeControl: false,
-      scaleControl: false,
-      draggable: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: mapStyle
     };

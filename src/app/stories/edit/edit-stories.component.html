@@ -1,48 +1,56 @@
-<div class="stories-page">
-  <a href="" [routerLink]="['/stories']">Back</a>
+<div class="edit-stories">
 
-  <div>
-    New
+  <div class="main">
+    <span class="image-container">
+      <img src="https://scontent.fnic1-1.fna.fbcdn.net/v/t31.0-8/17807482_1002697196532567_7944031912616663507_o.jpg?oh=e150a9ee9873d5a62b2723219bfa0033&oe=599498ED" />
+      </span>
+
+      <span class="text-content">
+      <span class="title">{{model.title}}</span>
+      <span class="subheader">{{model.subheader}}</span>
+    </span>
   </div>
 
-  <div class="container">
-    <h1>Hero Form</h1>
-    <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
+  <div class="line"></div>
+  <div class="point">
 
-      <div class="form-group">
-        <md-input-container>
+  </div>
+  <div class="point">
 
-        <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="model.title" name="title" required>
+  </div>
+  <div class="point">
 
-        </md-input-container>
+  </div>
+  <div class="point">
 
-        <md-input-container>
+  </div>
+  <div class="point">
 
-        <input mdInput placeholder="Start point" type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>
+  </div>
+  <div class="point">
 
-        </md-input-container>
+  </div>
+  <div class="point">
 
-        <md-input-container>
+  </div>
+  <div class="point">
 
-        <input mdInput placeholder="End point" type="text" class="form-control" [(ngModel)]="model.endPoint.address" name="endPoint" required>
+  </div>
+  <div class="point">
 
-        </md-input-container>
+  </div>
+  <div class="point">
 
+  </div>
+  <div class="point">
 
-        <div ng2FileDrop
-             [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-             (fileOver)="fileOverBase($event)"
-             [uploader]="uploader"
-             class="well my-drop-zone">
-          Base drop zone
-        </div>
-
-        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
-
-      </div>
-
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
   </div>
 
+  <div class="endpoint">
+
+    <span class="text-content">
+      <span class="title">{{model.title}}</span>
+      <span class="subheader">{{model.subheader}}</span>
+    </span>
+  </div>
 </div>

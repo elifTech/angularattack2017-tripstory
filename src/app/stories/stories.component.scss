@@ -1,40 +1,4 @@
 .stories-container {
   width: 980px;
-  margin: 10px auto;
-}
-
-.story-container {
-  width: 300px;
-  background: #fff;
-  border-radius: 5px;
-  height: 200px;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0 13px;
-
-  .image-container {
-    width: 100%;
-    background: #999;
-    height: 150px;
-    overflow: hidden;
-    position: relative;
-
-    &:after {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 80px;
-      content: ' ';
-      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100 */
-      background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-      background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-    }
-
-    img {
-      width: 100%;
-    }
-  }
+  margin: 0 auto;
 }

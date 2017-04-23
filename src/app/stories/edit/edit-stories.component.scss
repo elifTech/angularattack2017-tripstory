@@ -1,0 +1,130 @@
+.edit-stories {
+  width: 300px;
+  position: relative;
+  z-index: 10;
+  left: 50px;
+  top: 40px;
+  background: #fff;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px 13px;
+  overflow: hidden;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .5);
+
+  &:after {
+    background-image: url('../../../assets/img/marker-large.png');
+    background-repeat: no-repeat;
+    width: 74px;
+    height: 74px;
+    position: absolute;
+    content: ' ';
+    top: 130px;
+    left: 0;
+  }
+
+  .main {
+    height: 200px;
+  }
+  .image-container {
+    width: 100%;
+    background: #999;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    &:before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      content: ' ';
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100 */
+      background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .text-content {
+    padding-left: 74px;
+    position: absolute;
+    top: 145px;
+    left: 0;
+    right: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+
+    .title {
+      color: #05b1e2;
+      font-weight: bold;
+      text-overflow: ellipsis;
+      display: block;
+      font-size: 20px;
+    }
+    .subheader {
+      color: #666;
+      font-weight: bold;
+      text-overflow: ellipsis;
+      display: block;
+      font-size: 14px;
+    }
+  }
+
+  .line {
+    border-left: 3px dashed #05b1e2;
+    position: absolute;
+    left: 36px;
+    top: 170px;
+    bottom: 35px;
+  }
+  .endpoint {
+    position: relative;
+    border-top: 1px solid #e0e0e0;
+    height: 75px;
+
+    .text-content {
+      top: auto;
+      bottom: 0;
+      border-bottom: 0;
+    }
+    &:after {
+      background-image: url('../../../assets/img/marker-large.png');
+      background-repeat: no-repeat;
+      width: 74px;
+      height: 74px;
+      position: absolute;
+      content: ' ';
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .line + .point {
+    border-top: 0 none;
+  }
+  .point {
+    position: relative;
+    min-height: 75px;
+    border-top: 1px dashed #e0e0e0;
+
+    &:after {
+      background-image: url('../../../assets/img/marker.png');
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      content: ' ';
+      top: 15px;
+      left: 28px;
+    }
+  }
+}

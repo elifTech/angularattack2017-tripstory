@@ -1,0 +1,15 @@
+<div class="data-container">
+  <div class="stories-container">
+    <a [routerLink]="['/stories/' + story._id]" *ngFor="let story of storyList" class="story-container">
+        <span class="image-container">
+          <img src="https://scontent.fnic1-1.fna.fbcdn.net/v/t31.0-8/17807482_1002697196532567_7944031912616663507_o.jpg?oh=e150a9ee9873d5a62b2723219bfa0033&oe=599498ED" />
+        </span>
+
+      <span class="text-content">
+          <span class="title">{{story.title}}</span>
+          <span class="subheader">{{story.subheader}}</span>
+        </span>
+    </a>
+  </div>
+
+</div>

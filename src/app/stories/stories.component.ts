@@ -17,7 +17,6 @@ import { StoryRes } from '../services/stories.resource';
 export class StoriesComponent implements OnInit {
 
   storyList: IStory[] = [];
-  public showBackdrop:boolean = true;
 
   constructor(public route: ActivatedRoute,
               private storyRes: StoryRes,
@@ -26,11 +25,6 @@ export class StoriesComponent implements OnInit {
   }
 
   public ngOnInit() {
-    // this.showBackdrop = this.routeIsActive('/stories');
-    this.storyRes.query().subscribe((stories: IStory[]) => {
-       this.storyList = stories;
-    });
-
     const mapStyle = [
       {
         "featureType": "administrative",
@@ -120,8 +114,6 @@ export class StoriesComponent implements OnInit {
       scrollwheel: false,
       navigationControl: false,
       mapTypeControl: false,
-      scaleControl: false,
-      draggable: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: mapStyle
     };

@@ -153,9 +153,11 @@ nav a {
 .nav-menu {
   width: 800px;
   margin: 0 auto;
-  position: relative;
+  position: fixed;
   padding-top: 10px;
-  z-index: 3;
+  left: 50%;
+  margin-left: -400px;
+  z-index: 300;
 
   a {
     color: #05b1e2;

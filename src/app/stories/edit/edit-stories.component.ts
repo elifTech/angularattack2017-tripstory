@@ -10,8 +10,9 @@ import { UPLOAD_URL } from '../../config';
 
 @Component({
   selector: 'edit-stories',
-  styles: [`
-  `],
+  styleUrls: [
+    './edit-stories.component.scss'
+  ],
   templateUrl: './edit-stories.component.html'
 })
 export class EditStoriesComponent implements OnInit {

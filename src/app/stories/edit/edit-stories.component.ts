@@ -102,6 +102,9 @@ export class EditStoriesComponent implements OnInit {
       try {
         const fileItem = JSON.parse(item);
         fileItem.url = `${API_URL}/` + fileItem.path;
+        if(!this.editablePoint.files) {
+          this.editablePoint.files = [];
+        }
         this.editablePoint.files.push(fileItem);
       } catch (e) {
 
@@ -121,22 +124,11 @@ export class EditStoriesComponent implements OnInit {
   // ----------------------------------------------------EDIT------------------------------------------------------
 
   public onSubmit() {
-    // const geocoder = new google.maps.Geocoder();
-    //
-    // geocoder.geocode({'address': this.model.startPoint.address}, (results, status) => {
-    //   if (status == google.maps.GeocoderStatus.OK) {
-    //     console.info(results)
-    //     /*
-    //      //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-    //      map.setCenter( results[0].geometry.location );
-    //      var marker = new google.maps.Marker( {
-    //      map     : map,
-    //      position: results[0].geometry.location
-    //      } );*/
-    //   } else {
-    //     // alert( 'Geocode was not successful for the following reason: ' + status );
-    //   }
-    // });
+    // add new POI
+    if (!this.editablePoint.pathType) {
+      this.editablePoint.pathType = 'poi';
+      this.model.path.push(this.editablePoint);
+    }
 
     let story = this.storyRes.save(this.model).subscribe((ret: IStory) => {
       console.log('is correct', ret._id);
@@ -150,11 +142,14 @@ export class EditStoriesComponent implements OnInit {
     this.editablePoint = null;
     console.log('MODEL', model);
     this.initEditableForm();
-    this.editablePoint = model;
-    this.editablePoint.files = this.editablePoint.files.map(file => {
-      file.url = `${API_URL}/` + file.path;
-      return file;
-    });
+    this.editablePoint = model || {};
+
+    if(this.editablePoint.files) {
+      this.editablePoint.files = this.editablePoint.files.map(file => {
+        file.url = `${API_URL}/` + file.path;
+        return file;
+      });
+    }
   }
 
   public onPointHover(point) {
@@ -190,6 +185,9 @@ export class EditStoriesComponent implements OnInit {
       return;
     }
     console.log('----item', item, this.editablePoint);
+    if(!this.editablePoint.location) {
+      this.editablePoint.location = {};
+    }
     this.editablePoint.location.point = {
       lat: item.geometry.location.lat(),
       lng: item.geometry.location.lng()

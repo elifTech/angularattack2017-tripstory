@@ -8,6 +8,9 @@ import { IStory } from '../../interfaces';
 import { StoryRes } from '../../services/stories.resource';
 import { UPLOAD_URL, MAP_STYLES, API_URL } from '../../config';
 import { AppState } from '../../app.service';
+import { FormControl } from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 
 @Component({
   selector: 'edit-stories',
@@ -23,11 +26,17 @@ export class EditStoriesComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({url: UPLOAD_URL});
 
-  public model:IStory = {
+  public model: IStory = {
     startPoint: {},
     endPoint: {},
     images: []
   };
+
+  // edit public attrs
+  pointControl = new FormControl();
+  pointOptions: Observable<string[]>;
+  point$: Observer<string[]>;
+  setPoint: any;
 
   public coverPhoto;
 
@@ -88,6 +97,7 @@ export class EditStoriesComponent implements OnInit {
       }
     };
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
@@ -96,23 +106,26 @@ export class EditStoriesComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
   }
 
+
+  // ----------------------------------------------------EDIT------------------------------------------------------
+
   public onSubmit() {
     const geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode( { 'address' : this.model.startPoint.address }, ( results, status ) => {
-      if( status == google.maps.GeocoderStatus.OK ) {
+    geocoder.geocode({'address': this.model.startPoint.address}, (results, status) => {
+      if (status == google.maps.GeocoderStatus.OK) {
         console.info(results)
-/*
-        //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-        map.setCenter( results[0].geometry.location );
-        var marker = new google.maps.Marker( {
-          map     : map,
-          position: results[0].geometry.location
-        } );*/
+        /*
+         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
+         map.setCenter( results[0].geometry.location );
+         var marker = new google.maps.Marker( {
+         map     : map,
+         position: results[0].geometry.location
+         } );*/
       } else {
-       // alert( 'Geocode was not successful for the following reason: ' + status );
+        // alert( 'Geocode was not successful for the following reason: ' + status );
       }
-    } );
+    });
 
     let story = this.storyRes.create(this.model).subscribe((ret: IStory) => {
       this.router.navigate(['/stories/' + ret._id]);
@@ -121,7 +134,52 @@ export class EditStoriesComponent implements OnInit {
   }
 
   public onEdit(model: any) {
+    this.editablePoint = null;
     console.log('MODEL', model);
+    this.initEditableForm();
     this.editablePoint = model;
+
+  }
+
+  public getPointsByAddress(data) {
+    const address = (data && data.address) || '';
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, (results, status) => {
+      if (status == google.maps.GeocoderStatus.OK) {
+        console.log('---resuls', results);
+        this.point$.next(results);
+      }
+    });
+  }
+
+  public initEditableForm() {
+    this.pointOptions = Observable.create(observer => {
+      this.point$ = observer;
+
+      this.pointControl.valueChanges
+        .startWith(null)
+        .subscribe(val => this.getPointsByAddress(val))
+    });
+
+    this.setPoint = this.setPointFunc.bind(this);
+  }
+
+  public setPointFunc(item) {
+    if (!item) {
+      return;
+    }
+    console.log('----item', item, this.editablePoint);
+    this.editablePoint.location.point = {
+      lat: item.geometry.location.lat(),
+      lng: item.geometry.location.lng()
+    };
+    // this.model.startPoint = {
+    //   address: item.formatted_address,
+    //   point: {
+    //     lat: item.geometry.location.lat(),
+    //     lng: item.geometry.location.lng()
+    //   }
+    // };
+    return item.formatted_address;
   }
 }

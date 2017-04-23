@@ -51,6 +51,7 @@ export interface IPathSegmentRoad {
   start: IPoint;
   end: IPoint;
   travelType: ETravelModeType;
+  story: IPathSegmentStory;
 }
 
 export interface IPathSegmentPoi {

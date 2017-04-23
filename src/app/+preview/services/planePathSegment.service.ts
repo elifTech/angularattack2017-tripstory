@@ -1,8 +1,9 @@
 import { PathSegment } from './pathSegment.service';
+import {ETravelModeType} from "../../interfaces";
 
 export class PlanePathSegment extends PathSegment {
-  constructor(public map: any, public path: string) {
-    super(map, path);
+  constructor(public map: any, public path: string, public marker: string) {
+    super(map, path, marker, ETravelModeType.PLANE);
   }
 
   get route() {

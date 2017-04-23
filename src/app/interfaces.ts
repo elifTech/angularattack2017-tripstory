@@ -14,7 +14,7 @@ enum EPathSegmentType {
 }
 
 const TRAVEL_MODE_TYPE = {
-  DRIVING: 'poi',
+  DRIVING: 'driving',
   WALKING: 'walking',
   PLANE: 'plane',
   FERRY: 'ferry',

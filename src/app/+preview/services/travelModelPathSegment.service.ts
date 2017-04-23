@@ -1,12 +1,13 @@
 import { ETravelModeType } from '../../interfaces';
 import { PathSegment } from './pathSegment.service';
+import { PathScroller } from './pathScroller.service';
 
 export class TravelModelPathSegment extends PathSegment {
   public polyline: any;
   public directionDisplay: any;
 
-  constructor(public map: any, public path: string, public travelMode: ETravelModeType) {
-    super(map, path);
+  constructor(public map: any, public path: string, public travelMode: ETravelModeType, public marker: any) {
+    super(map, path, marker, travelMode);
 
     this.polyline = null;
   }
@@ -87,5 +88,16 @@ export class TravelModelPathSegment extends PathSegment {
       this.polyline = polyline;
       return polyline;
     });
+  }
+
+  moveMarker(fraction) {
+    const pathLength = Math.round(google.maps.geometry.spherical.computeLength(this.polyline.getPath().getArray()));
+    const pos = pathLength * fraction / 100;
+
+    const p = this.polyline.GetPointAtDistance(pos);
+
+    this.marker.setPosition(p);
+    this.map.setCenter(p);
+    this.marker.setIcon(PathScroller.icons[this.travelMode]);
   }
 }

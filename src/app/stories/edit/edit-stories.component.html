@@ -14,7 +14,7 @@
   <div class="line"></div>
   <div *ngFor="let path of model.path; let i = index;" [ngClass]="{'path': path.pathType === 'path', 'point': path.pathType === 'poi'}">
     <div class="point-content" *ngIf="path.pathType === 'poi'">
-      <div style="position: absolute; right: 12px; top: 12px; width: 16px; height: 16px; cursor: pointer">
+      <div style="position: absolute; right: 12px; top: 12px; width: 16px; height: 16px; cursor: pointer" (click)="onEdit(path)">
         <md-icon style="color: #c2c2c2; font-size: 16px;">edit</md-icon>
       </div>
       <!--<span class="location">{{path.subheader}}</span>-->
@@ -81,6 +81,69 @@
   </div>
 </div>
 
-<div class="edit-stories-editable">
+<div class="edit-stories-editable" *ngIf="editablePoint">
+  <div class="modal">
 
+    <h2>{{editablePoint.title}}</h2>
+
+    <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <md-input-container>
+
+          <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="editablePoint.title"
+                 name="title" required>
+          <md-hint>
+            Interesting title of your story
+          </md-hint>
+        </md-input-container>
+      </div>
+      <div class="form-group">
+        <md-input-container>
+
+          <input mdInput placeholder="Start point" [mdAutocomplete]="auto" [formControl]="startPointControl" required>
+
+          <md-hint>
+            Enter address where your trip starts
+          </md-hint>
+        </md-input-container>
+        <md-autocomplete #auto="mdAutocomplete" [displayWith]="setStartPoint">
+          <md-option *ngFor="let state of startPointOptions | async" [value]="state">
+            {{ state.formatted_address }}
+          </md-option>
+        </md-autocomplete>
+      </div>
+
+      <div class="form-group">
+        <md-input-container>
+
+          <input mdInput placeholder="End point" [mdAutocomplete]="auto2" [formControl]="endPointControl" required>
+
+          <md-hint>
+            Enter address where your trip ends
+          </md-hint>
+        </md-input-container>
+        <md-autocomplete #auto2="mdAutocomplete" [displayWith]="setEndPoint">
+          <md-option *ngFor="let state2 of endPointOptions | async" [value]="state2">
+            {{ state2.formatted_address }}
+          </md-option>
+        </md-autocomplete>
+      </div>
+
+      <div class="image-block">
+        <div class="img-container" *ngFor="let image of editablePoint.images">
+
+          <img src="{{image.url}}"  name="path" height="70" width="90">
+          <a (click)="removeFile(image)">X</a>
+        </div>
+      </div>
+      <input type="file" ng2FileSelect [uploader]="uploader" multiple/><br/>
+
+
+      <div class="form-actions">
+        <button type="submit" md-raised-button>Save</button>
+      </div>
+    </form>
+
+  </div>
 </div>

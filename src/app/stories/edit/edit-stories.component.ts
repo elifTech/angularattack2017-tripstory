@@ -31,6 +31,8 @@ export class EditStoriesComponent implements OnInit {
 
   public coverPhoto;
 
+  public editablePoint = null;
+
   constructor(public route: ActivatedRoute, private storyRes: StoryRes, private router: Router, public appState: AppState) {
   }
 
@@ -116,5 +118,10 @@ export class EditStoriesComponent implements OnInit {
       this.router.navigate(['/stories/' + ret._id]);
     });
     console.info(story);
+  }
+
+  public onEdit(model: any) {
+    console.log('MODEL', model);
+    this.editablePoint = model;
   }
 }

@@ -60,7 +60,9 @@ export interface IPathSegmentPoi {
 }
 
 export interface IFile {
+  _id?: string;
   title: string;
+  path: string;
 }
 
 export interface IStory {

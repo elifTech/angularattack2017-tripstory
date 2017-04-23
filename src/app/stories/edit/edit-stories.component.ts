@@ -1,12 +1,12 @@
 import {
   Component,
-  OnInit
+  OnInit, APP_ID
 } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IStory } from '../../interfaces';
 import { StoryRes } from '../../services/stories.resource';
-import { UPLOAD_URL, MAP_STYLES } from '../../config';
+import { UPLOAD_URL, MAP_STYLES, API_URL } from '../../config';
 import { AppState } from '../../app.service';
 
 @Component({
@@ -29,6 +29,8 @@ export class EditStoriesComponent implements OnInit {
     images: []
   };
 
+  public coverPhoto;
+
   constructor(public route: ActivatedRoute, private storyRes: StoryRes, private router: Router, public appState: AppState) {
   }
 
@@ -38,6 +40,10 @@ export class EditStoriesComponent implements OnInit {
       this.storyRes.get(params['id']).subscribe((item: IStory) => {
         this.model = item;
         console.info(item);
+
+        if (item.images && item.images.length) {
+          this.coverPhoto = `${API_URL}/${item.images[0].path}`;
+        }
 
 
         const mapStyle = MAP_STYLES;

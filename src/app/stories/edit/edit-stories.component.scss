@@ -176,6 +176,13 @@
         display: block;
         font-size: 18px;
       }
+      .title.not-setuped {
+        color: rgba(102, 102, 102, 0.84);
+        font-weight: 100;
+        text-overflow: ellipsis;
+        display: block;
+        font-size: 18px;
+      }
       .location {
         color: #666;
         font-weight: bold;
@@ -243,4 +250,20 @@
   .upload-photos {
     margin-top: 130px;
   }
+}
+
+.edit-stories-editable {
+  width: 600px;
+  position: fixed;
+  z-index: 10;
+  left: 380px;
+  top: 120px;
+  background: #fff;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px 13px;
+  overflow: hidden;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .5);
+  min-height: 500px;
 }

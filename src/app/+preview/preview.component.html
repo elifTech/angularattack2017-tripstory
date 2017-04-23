@@ -7,23 +7,21 @@
 
     <div *ngIf="model">
       <div *ngFor='let path of model.path'>
-        <div class="point">
-          <div class="point">
-            <h2>
-              {{path.title}}
-            </h2>
-            <div>
-              {{path.body}}
-            </div>
-            <figure *ngIf="path.files">
-              <div class="js-gallery-content">
-                <div *ngFor='let file of path.files'>
-                  <img src="{{API_URL}}/{{file.path}}" height="400" />
-                  <!--TODO height-->
-                </div>
-              </div>
-            </figure>
+        <div *ngIf="path.pathType == 'poi'">
+          <h2>
+            {{path.title}}
+          </h2>
+          <div>
+            {{path.body}}
           </div>
+          <figure *ngIf="path.files">
+            <div class="js-gallery-content">
+              <div *ngFor='let file of path.files'>
+                <img src="{{API_URL}}/{{file.path}}" height="400" />
+                <!--TODO height-->
+              </div>
+            </div>
+          </figure>
         </div>
       </div>
 

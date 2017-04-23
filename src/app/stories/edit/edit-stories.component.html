@@ -39,10 +39,10 @@
         <md-icon *ngIf="path.travelType === 'ferry'">ferry</md-icon>
         <md-icon *ngIf="path.travelType === 'plain'">plain</md-icon>
       </a>
-      <div>
-        <div *ngFor="let file of path.files">
+      <div class="path-photos">
+        <div *ngFor="let file of path.files" class="path-photo-wrapper">
           <img src="{{file.path}}" width="72" height="56" />
-          <span>{{file.title}}</span>
+          <span class="path-photo-title">{{file.title}}</span>
         </div>
       </div>
     </div>

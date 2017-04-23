@@ -158,8 +158,9 @@ export class EditStoriesComponent implements OnInit {
     }
   }
 
-  public getPointsByAddress(data) {
-    const address = (data && data.address) || '';
+  public getPointsByAddress(address) {
+    if (typeof address !== 'string') return;
+
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, (results, status) => {
       if (status == google.maps.GeocoderStatus.OK) {

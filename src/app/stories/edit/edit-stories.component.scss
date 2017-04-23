@@ -171,8 +171,57 @@
 .new-point {
   box-shadow: inset 0 0 4px rgba(0, 0, 0, .5);
   background-color: #fafafa;
-  min-height: 75px;
+  //min-height: 75px;
   border-top: 1px dashed #e0e0e0;
   margin-left: -10px;
   margin-right: -10px;
+  min-height: 290px;
+
+  .upload-photos, .add-new-points {
+    position: absolute;
+    width: 200px;
+    height: 24px;
+    left: 20px;
+    display: flex;
+
+    & > div {
+      display: inline-block;
+      height: 36px;
+    }
+
+    .icon-wrapper {
+      border: 1px dashed #05b1e2;
+      border-radius: 3px;
+      background: #fafafa;
+      padding: 5px;
+      width: 24px;
+      height: 24px;
+
+      .mat-icon {
+        color: #05b1e2;
+      }
+    }
+
+    .icon-title {
+      font-weight: bold;
+      margin-left: 20px;
+      color: #969696;
+      line-height: 36px;
+    }
+  }
+
+  .or {
+    margin-top: 98px;
+    position: absolute;
+    left: 80px;
+    color: #969696;
+  }
+
+  .add-new-points {
+    margin-top: 50px;
+  }
+
+  .upload-photos {
+    margin-top: 130px;
+  }
 }

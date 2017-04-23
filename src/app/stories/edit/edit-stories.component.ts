@@ -9,12 +9,14 @@ import { StoryRes } from '../../services/stories.resource';
 import { UPLOAD_URL } from '../../config';
 
 @Component({
-  selector: 'new-stories',
+  selector: 'edit-stories',
   styles: [`
   `],
-  templateUrl: './new-stories.component.html'
+  templateUrl: './edit-stories.component.html'
 })
-export class NewStoriesComponent implements OnInit {
+export class EditStoriesComponent implements OnInit {
+  private sub: any;
+
   public hasBaseDropZoneOver: boolean = false;
 
   public uploader: FileUploader = new FileUploader({url: UPLOAD_URL});
@@ -29,6 +31,12 @@ export class NewStoriesComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.storyRes.get({ id: +params['id'] }).$observable.subscribe((item: IStory) => {
+        this.model = item;
+      });
+    });
+
     this.uploader.onAfterAddingAll = (items) => {
       items.forEach((file) => {
         file.upload();
@@ -43,6 +51,9 @@ export class NewStoriesComponent implements OnInit {
       }
     };
   }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
@@ -53,12 +64,22 @@ export class NewStoriesComponent implements OnInit {
 
     geocoder.geocode( { 'address' : this.model.startPoint.address }, ( results, status ) => {
       if( status == google.maps.GeocoderStatus.OK ) {
-        console.info(results);
+        console.info(results)
+/*
+        //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
+        map.setCenter( results[0].geometry.location );
+        var marker = new google.maps.Marker( {
+          map     : map,
+          position: results[0].geometry.location
+        } );*/
+      } else {
+       // alert( 'Geocode was not successful for the following reason: ' + status );
       }
     } );
 
     let story = this.storyRes.save(this.model, (ret: IStory) => {
       this.router.navigate(['/stories/' + ret._id]);
     });
+    console.info(story);
   }
 }

@@ -35,6 +35,14 @@ nav a {
   position: relative;
   display: block;
   margin: 0 auto;
+
+  &.preloader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -139px;
+    margin-top: -50px;
+  }
 }
 
 .pulse-button {

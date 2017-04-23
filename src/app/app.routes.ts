@@ -5,6 +5,7 @@ import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
 import { StoriesComponent } from './stories';
 import { NewStoriesComponent } from './stories/new';
+import { EditStoriesComponent } from './stories/edit';
 import { AuthGuard } from './services/auth.guard';
 
 import { DataResolver } from './app.resolver';
@@ -22,7 +23,8 @@ export const ROUTES: Routes = [
     canActivate: [AuthGuard],
     children: [
       // { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      { path: 'new', component: NewStoriesComponent }
+      { path: 'new', component: NewStoriesComponent },
+      { path: ':id', component: EditStoriesComponent }
     ]
   },
   {path: 'detail', loadChildren: './+detail#DetailModule'},

@@ -4,6 +4,8 @@ export const IS_DEV = ENV === 'development';
 
 export const API_URL = IS_DEV ? 'http://localhost:4040' : 'https://eliftech-tripstory.herokuapp.com';
 
+export const UPLOAD_URL = `${API_URL}/api/upload`;
+
 export const FACEBOOK_APP_ID = IS_DEV ? '418197618334612' : '1876751672543517';
 
 export const GOOGLE_CLIENT_ID = '616075536950-pauau0e7u0c980llqh99ftvg3sd32c61.apps.googleusercontent.com';

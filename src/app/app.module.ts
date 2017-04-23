@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FileUploadModule } from 'ng2-file-upload';
 import {
   NgModule,
   ApplicationRef
@@ -38,6 +39,7 @@ import { AboutComponent } from './about';
 import { LoginComponent } from './login';
 import { StoriesComponent } from './stories';
 import { NewStoriesComponent } from './stories/new';
+import { EditStoriesComponent } from './stories/edit';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
@@ -67,6 +69,7 @@ type StoreType = {
     LoginComponent,
     StoriesComponent,
     NewStoriesComponent,
+    EditStoriesComponent,
     HomeComponent,
     NoContentComponent,
     XLargeDirective
@@ -81,6 +84,7 @@ type StoreType = {
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    FileUploadModule,
     ResourceModule.forRoot(),
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     Ng2UiAuthModule.forRoot(MyAuthConfig)

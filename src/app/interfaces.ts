@@ -34,8 +34,9 @@ export interface IPoint {
 }
 
 export interface IPathSegmentLocation {
-  title: string;
-  point: IPoint;
+  title?: string;
+  address?: string;
+  point?: IPoint;
 }
 
 export interface IPathSegmentStory {
@@ -44,16 +45,20 @@ export interface IPathSegmentStory {
 }
 
 export interface IPathSegmentRoad {
-  type: EPathSegmentType;
+  pathType: EPathSegmentType;
   start: IPoint;
   end: IPoint;
   travelType: ETravelModeType;
 }
 
 export interface IPathSegmentPoi {
-  type: EPathSegmentType;
+  pathType: EPathSegmentType;
   location: IPathSegmentLocation;
   story: IPathSegmentStory;
+}
+
+export interface IFile {
+  title: string;
 }
 
 export interface IStory {
@@ -61,5 +66,10 @@ export interface IStory {
   title?: string;
   subheader?: string;
 
+  startPoint?: IPathSegmentLocation,
+  endPoint?: IPathSegmentLocation,
+
   path?: (IPathSegmentPoi | IPathSegmentRoad)[];
+
+  images?: Array<IFile>
 }

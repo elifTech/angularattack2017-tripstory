@@ -180,6 +180,13 @@ export class EditStoriesComponent implements OnInit {
     this.setPoint = this.setPointFunc.bind(this);
   }
 
+  public removeFile(image: any){
+    const index = this.editablePoint.files.findIndex(item => item._id == image._id);
+    if (index !== -1) {
+      this.editablePoint.files.splice(index, 1);
+    }
+  }
+
   public setPointFunc(item) {
     if (!item) {
       return;

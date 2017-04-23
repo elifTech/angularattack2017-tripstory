@@ -6,7 +6,8 @@ import { FileUploader } from 'ng2-file-upload';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IStory } from '../../interfaces';
 import { StoryRes } from '../../services/stories.resource';
-import { UPLOAD_URL } from '../../config';
+import { UPLOAD_URL, MAP_STYLES } from '../../config';
+import { AppState } from '../../app.service';
 
 @Component({
   selector: 'edit-stories',
@@ -28,7 +29,7 @@ export class EditStoriesComponent implements OnInit {
     images: []
   };
 
-  constructor(public route: ActivatedRoute, private storyRes: StoryRes, private router: Router) {
+  constructor(public route: ActivatedRoute, private storyRes: StoryRes, private router: Router, public appState: AppState) {
   }
 
   public ngOnInit() {
@@ -36,7 +37,32 @@ export class EditStoriesComponent implements OnInit {
       console.info(params);
       this.storyRes.get(params['id']).subscribe((item: IStory) => {
         this.model = item;
-        console.info(item)
+        console.info(item);
+
+
+        const mapStyle = MAP_STYLES;
+
+        if (item.startPoint && item.startPoint.point) {
+          const startPoint = item.startPoint.point;
+
+          var startPointView = new google.maps.LatLng(startPoint.lat, startPoint.lng);
+
+          const myOptions = {
+            zoom: 12,
+            center: startPointView,
+            scrollwheel: false,
+            navigationControl: false,
+            mapTypeControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: mapStyle
+          };
+          const map = new google.maps.Map(document.getElementById("map"), myOptions);
+        }
+        // this.appState.state.map.setCenter( item.path[0].geometry.location );
+        // var marker = new google.maps.Marker( {
+        //   map     : this.appState.state.map,
+        //   position: item.path[0].geometry.location
+        // } );
       });
     });
 
@@ -85,6 +111,4 @@ export class EditStoriesComponent implements OnInit {
     });
     console.info(story);
   }
-
-  public onChangeAddress
 }

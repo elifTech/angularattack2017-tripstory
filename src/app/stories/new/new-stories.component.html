@@ -1,62 +1,74 @@
-<div class="stories-page">
+<div class="new-stories-page">
 
 
+  <div class="modal">
 
-  <a href="" [routerLink]="['/stories']">Back</a>
+    <h1>New story</h1>
 
-  <div>
-    New
-  </div>
-
-  <div class="container">
-    <h1>Hero Form</h1>
     <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
 
       <div class="form-group">
         <md-input-container>
 
-        <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="model.title" name="title" required>
-
+          <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="model.title"
+                 name="title" required>
+          <md-hint>
+            Interesting title of your story
+          </md-hint>
         </md-input-container>
-
+      </div>
+      <div class="form-group">
         <md-input-container>
 
-        <input mdInput placeholder="Start point" id="autocomplete" (keyup)="onChangeAddress(model.startPoint)" type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>
+          <input mdInput placeholder="Start point" [mdAutocomplete]="auto" [formControl]="startPointControl" required>
 
+          <!--<input mdInput placeholder="Start point" (keyup)="onChangeAddress(model.startPoint)"-->
+                 <!--type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>-->
+
+          <md-hint>
+            Enter address where your trip starts
+          </md-hint>
         </md-input-container>
-
-
-        <md-input-container>
-          <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
-        </md-input-container>
-
-        <md-autocomplete #auto="mdAutocomplete">
-          <md-option *ngFor="let state of filteredStates | async" [value]="state">
-            {{ state }}
+        <md-autocomplete #auto="mdAutocomplete" [displayWith]="setStartPoint">
+          <md-option *ngFor="let state of startPointOptions | async" [value]="state">
+            {{ state.formatted_address }}
           </md-option>
         </md-autocomplete>
-
-        <md-input-container>
-
-        <input mdInput placeholder="End point" type="text" class="form-control" [(ngModel)]="model.endPoint.address" name="endPoint" required>
-
-        </md-input-container>
-
-
-        <div ng2FileDrop
-             [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-             (fileOver)="fileOverBase($event)"
-             [uploader]="uploader"
-             class="well my-drop-zone">
-          Base drop zone
-        </div>
-
-        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
-
       </div>
 
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
+      <div class="form-group">
+        <md-input-container>
 
+          <input mdInput placeholder="End point" [mdAutocomplete]="auto2" [formControl]="endPointControl" required>
+
+          <!--<input mdInput placeholder="Start point" (keyup)="onChangeAddress(model.startPoint)"-->
+          <!--type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>-->
+
+          <md-hint>
+            Enter address where your trip ends
+          </md-hint>
+        </md-input-container>
+        <md-autocomplete #auto2="mdAutocomplete" [displayWith]="setEndPoint">
+          <md-option *ngFor="let state2 of endPointOptions | async" [value]="state2">
+            {{ state2.formatted_address }}
+          </md-option>
+        </md-autocomplete>
+      </div>
+
+      <div class="image-block">
+        <div class="img-container" *ngFor="let image of model.images">
+
+          <img src="{{image.url}}"  name="path" height="70" width="90">
+          <a (click)="removeFile(image)">X</a>
+        </div>
+      </div>
+      <input type="file" ng2FileSelect [uploader]="uploader" multiple/><br/>
+
+
+      <div class="form-actions">
+        <button type="submit" md-raised-button>Create</button>
+      </div>
+    </form>
+
+  </div>
 </div>

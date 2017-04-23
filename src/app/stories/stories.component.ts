@@ -126,6 +126,11 @@ export class StoriesComponent implements OnInit {
     const map = new google.maps.Map(document.getElementById("map"), myOptions);
   }
 
+  public routeIsActive(routePath: string)
+  {
+    return this.router.url === routePath;
+  }
+
   public logout() {
     this.auth.logout()
       .subscribe({

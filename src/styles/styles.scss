@@ -121,3 +121,76 @@ nav a {
   margin-top: -8px;
   margin-left: 5px;
 }
+
+.maps-container {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  .map {
+    width: 100%;
+    height: 100%;
+  }
+}
+.backdrop {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, .5);
+}
+
+.data-container {
+  position: relative;
+  z-index: 3;
+}
+
+.nav-menu {
+  width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 10px;
+
+  a {
+    color: #05b1e2;
+    font-weight: bold;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 50px;
+    padding: 15px 20px;
+    margin: 0 5px;
+
+    &.active {
+      background: #05b1e2;
+      color: #fff;
+    }
+  }
+
+  &:before {
+    position: absolute;
+    background: rgba(255, 255, 255, .5);
+    content: ' ';
+    left: 0px;
+    top: 20px;
+    bottom: 40px;
+    right: 0px;
+    border-radius: 50px;
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 35px;
+
+    &.left {
+      left: -5px;
+    }
+    &.right {
+      right: -5px;
+    }
+  }
+}

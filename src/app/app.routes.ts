@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
 import { StoriesComponent } from './stories';
+import { AboutComponent } from './about';
 import { NewStoriesComponent } from './stories/new';
 import { EditStoriesComponent } from './stories/edit';
 import { AuthGuard } from './services/auth.guard';
@@ -13,7 +14,7 @@ export const ROUTER_PROVIDERS = [
 ];
 export const ROUTES: Routes = [
   {path: '', component: StoriesComponent, canActivate: [AuthGuard]},
-  // {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
+  {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
   {
     path: 'stories',
     component: StoriesComponent,

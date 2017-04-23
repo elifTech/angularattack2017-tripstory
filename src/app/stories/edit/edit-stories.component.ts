@@ -43,6 +43,8 @@ export class EditStoriesComponent implements OnInit {
 
   public editablePoint = null;
 
+  public map;
+
   public buildMap(story:IStory, map:any) {
     const builder = new PathBuilder(map, story);
     console.info('buildMap');
@@ -80,8 +82,8 @@ export class EditStoriesComponent implements OnInit {
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             styles: mapStyle
           };
-          const map = new google.maps.Map(document.getElementById("map"), myOptions);
-          this.buildMap(item, map);
+          this.map = new google.maps.Map(document.getElementById("map"), myOptions);
+          this.buildMap(item, this.map);
         }
         // this.appState.state.map.setCenter( item.path[0].geometry.location );
         // var marker = new google.maps.Marker( {
@@ -146,7 +148,17 @@ export class EditStoriesComponent implements OnInit {
     console.log('MODEL', model);
     this.initEditableForm();
     this.editablePoint = model;
+  }
 
+  public onPointHover(point) {
+    // console.log('point hovered', point);
+    if(point.location) {
+      this.map.setCenter( point.location.point );
+    }
+    // var marker = new google.maps.Marker( {
+    //   map     : this.appState.state.map,
+    //   position: item.path[0].geometry.location
+    // } );
   }
 
   public getPointsByAddress(data) {
@@ -154,7 +166,6 @@ export class EditStoriesComponent implements OnInit {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, (results, status) => {
       if (status == google.maps.GeocoderStatus.OK) {
-        console.log('---resuls', results);
         this.point$.next(results);
       }
     });

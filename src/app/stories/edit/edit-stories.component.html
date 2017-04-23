@@ -13,7 +13,7 @@
 
   <div class="line"></div>
   <div *ngFor="let path of model.path; let i = index;" [ngClass]="{'path': path.pathType === 'path', 'point': path.pathType === 'poi'}">
-    <div class="point-content" *ngIf="path.pathType === 'poi'">
+    <div class="point-content" *ngIf="path.pathType === 'poi'" (mouseover)="onPointHover(path)">
       <div style="position: absolute; right: 12px; top: 12px; width: 16px; height: 16px; cursor: pointer" (click)="onEdit(path)">
         <md-icon style="color: #c2c2c2; font-size: 16px;">edit</md-icon>
       </div>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="path.pathType === 'path'">
+    <div *ngIf="path.pathType === 'path'" (mouseover)="onPointHover(path)">
       <a class="path-select">
         <md-icon *ngIf="path.travelType === 'driving'">directions_car</md-icon>
         <md-icon *ngIf="path.travelType === 'walking'">walking</md-icon>

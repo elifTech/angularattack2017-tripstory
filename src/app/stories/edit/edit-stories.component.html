@@ -18,7 +18,7 @@
   <div *ngFor="let path of model.path; let i = index;" [ngClass]="{'path': path.pathType === 'path', 'point': path.pathType === 'poi'}">
     <div class="point-content" *ngIf="path.pathType === 'poi'" (mouseover)="onPointHover(path)">
       <div style="position: absolute; right: 12px; top: 12px; width: 16px; height: 16px; cursor: pointer" (click)="onEdit(path)">
-        <md-icon style="color: #c2c2c2; font-size: 16px;">edit</md-icon>
+        <md-icon title="edit" style="color: #c2c2c2; font-size: 16px;">edit</md-icon>
       </div>
       <!--<span class="location">{{path.subheader}}</span>-->
       <span class="title" *ngIf="path.title">

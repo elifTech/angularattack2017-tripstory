@@ -1,10 +1,9 @@
 import {ICONS} from "../config";
-import {ETravelModeType} from "../interfaces";
 
 export class PathSegment {
   public editMode: boolean = false;
   
-  constructor(public map: any, public path: string, public marker: any, public travelMode: ETravelModeType) {
+  constructor(public map: any, public path: string, public marker: any, public travelMode: string) {
   }
 
   moveMarker(fraction) {

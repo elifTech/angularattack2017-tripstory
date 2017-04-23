@@ -1,5 +1,4 @@
 import { ICONS } from '../config';
-import { ETravelModeType } from '../interfaces';
 import { PathSegment } from './pathSegment.service';
 import { PathScroller } from './pathScroller.service';
 
@@ -7,7 +6,7 @@ export class TravelModelPathSegment extends PathSegment {
   public polyline: any;
   public directionDisplay: any;
 
-  constructor(public map: any, public path: string, public travelMode: ETravelModeType, public marker: any) {
+  constructor(public map: any, public path: any, public travelMode: string, public marker: any) {
     super(map, path, marker, travelMode);
 
     this.polyline = null;
@@ -21,7 +20,7 @@ export class TravelModelPathSegment extends PathSegment {
     const request = {
       origin: this.path[0],
       destination: this.path[1],
-      travelMode: ETravelModeType[this.travelMode]
+      travelMode: this.travelMode.toUpperCase()
     };
     
     return new Promise((resolve, reject) => {

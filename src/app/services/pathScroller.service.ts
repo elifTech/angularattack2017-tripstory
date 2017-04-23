@@ -20,13 +20,13 @@ export class PathScroller {
     });
     this.initRoutes();
     this.marker.setIcon(ICONS[this.pathPieces[0].type]);
-    this.marker.setPosition(this.pathPieces[0].path[0]);
+    this.marker.setPosition(this.pathPieces[0].start);
   }
 
   public initRoutes() {
     this.pathSegments = this.pathPieces.map(item => {
-      const SegmentTypeInstance = PathScroller.getPathSegmentTypeInstance(item.type);
-      return new SegmentTypeInstance(this.map, item.path, this.marker);
+      const SegmentTypeInstance = PathScroller.getPathSegmentTypeInstance(item.travelType);
+      return new SegmentTypeInstance(this.map, [item.start, item.end], this.marker);
     });
 
     const pathSegmentsRoutes = this.pathSegments.map(pathSegment => pathSegment.route);

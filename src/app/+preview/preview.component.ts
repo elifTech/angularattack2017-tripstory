@@ -2,11 +2,12 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import {IStory, EPathSegmentType, ETravelModeType} from "../interfaces";
+import {IStory} from "../interfaces";
 import {PREVIEW_MAP_STYLES} from "../config";
 import { PathScroller } from '../services/pathScroller.service';
 import { StoryRes } from '../services/stories.resource';
 import { ActivatedRoute } from '@angular/router';
+import {API_URL} from '../config';
 
 @Component({
   selector: 'preview',
@@ -24,6 +25,7 @@ export class PreviewComponent implements OnInit {
 
   private sections: any;
   private sectionsBounds: any;
+  private API_URL:string = API_URL;
 
   public model: IStory = {
     startPoint: {},
@@ -35,63 +37,70 @@ export class PreviewComponent implements OnInit {
   }
 
   public ngOnInit() {
-
-
-    const pathPieces = [
-      {
-        type: 'walking',
-        path: [new google.maps.LatLng(36.966667, 22.716667), new google.maps.LatLng(37.966667, 23.716667)]
-      },
-      {
-        type: 'plane',
-        path: [new google.maps.LatLng(37.966667, 23.716667), new google.maps.LatLng(36.966667, 22.716667)]
-      },
-      {
-        type: 'driving',
-        path: [new google.maps.LatLng(36.966667, 22.716667), new google.maps.LatLng(36.866667, 22.616667)]
-      }
-    ];
-
-    const startPoint = pathPieces[0].path[0];
-
-
-    this.story = {
-      title: 'The Wild Path',
-      subheader: 'AN ICELANDIC ADVENTURE',
-
-      path: [
-        {
-          pathType: EPathSegmentType.POINT_OF_INTEREST,
-          location: {
-            title: 'REYKJAVÍK',
-            point: {
-              lat: 55.5,
-              lng: 34.2
-            }
-          },
-          story: {
-            title: 'The Adventure Begins',
-            body: 'We caught glimpses of faces at most of the windows peering curiousl progress through the town.'
-          }
-        },
-        {
-          pathType: EPathSegmentType.ROAD,
-          travelType: ETravelModeType.WALKING,
-          start: {
-            lat: 55.5,
-            lng: 34.2
-          },
-          end: {
-            lat: 56.5,
-            lng: 35.2
-          }
-        }
-      ]
-    };
-    
     this.sub = this.route.params.subscribe(params => {
       this.storyRes.get(params['id']).subscribe((item: IStory) => {
         this.model = item;
+
+        this.model.path[0].start = this.model.startPoint.point;
+        this.model.path[this.model.path.length - 1].end = this.model.endPoint.point;
+
+        const pathPieces = this.model.path.filter(item => item.pathType === 'road' || item.pathType === 'path');
+
+        const startPoint = pathPieces[0].start;
+
+        setTimeout(() => {
+          this.sections = Array.from(document.querySelectorAll('.point'));
+          this.sectionsBounds = this.sections.map(section => {
+            const bounds = section.getBoundingClientRect();
+            // console.info(bounds, section.offsetHeight);
+            return {
+              top:bounds.top,
+              bottom:bounds.bottom,
+              left:bounds.left,
+              right:bounds.right,
+              height:bounds.height,
+              width:bounds.width,
+            }
+          });
+
+          console.log(this.scroller.pathSegments);
+          console.log(this.sectionsBounds);
+        }, 1000);
+
+
+        // this.story = {
+        //   title: 'The Wild Path',
+        //   subheader: 'AN ICELANDIC ADVENTURE',
+        //
+        //   path: [
+        //     {
+        //       pathType: EPathSegmentType.POINT_OF_INTEREST,
+        //       location: {
+        //         title: 'REYKJAVÍK',
+        //         point: {
+        //           lat: 55.5,
+        //           lng: 34.2
+        //         }
+        //       },
+        //       story: {
+        //         title: 'The Adventure Begins',
+        //         body: 'We caught glimpses of faces at most of the windows peering curiousl progress through the town.'
+        //       }
+        //     },
+        //     {
+        //       pathType: EPathSegmentType.ROAD,
+        //       travelType: ETravelModeType.WALKING,
+        //       start: {
+        //         lat: 55.5,
+        //         lng: 34.2
+        //       },
+        //       end: {
+        //         lat: 56.5,
+        //         lng: 35.2
+        //       }
+        //     }
+        //   ]
+        // };
 
         var myOptions = {
           zoom: 8,
@@ -109,19 +118,6 @@ export class PreviewComponent implements OnInit {
 
         this.scroller = new PathScroller(map, pathPieces);
         this.scroller.init();
-        
-        this.sections = Array.from(document.querySelectorAll('.point'));
-        this.sectionsBounds = this.sections.map(section => {
-          const bounds = section.getBoundingClientRect();
-          return {
-            top:bounds.top,
-            bottom:bounds.bottom,
-            left:bounds.left,
-            right:bounds.right,
-            height:bounds.height,
-            width:bounds.width,
-          }
-        });
       });
     });
   }

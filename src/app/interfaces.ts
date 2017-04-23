@@ -2,33 +2,33 @@ export interface ITokenUser {
   _id: string;
 }
 
-export
-enum EPathSegmentType {
-  POINT_OF_INTEREST,
-  ROAD
-}
-
-export
-const PATH_SEGMENT_TYPE = {
-  [EPathSegmentType.POINT_OF_INTEREST]: 'poi',
-  [EPathSegmentType.ROAD]: 'road'
-};
-
-export
-enum ETravelModeType {
-  DRIVING,
-  WALKING,
-  PLANE,
-  FERRY
-}
-
-export
-const TRAVEL_MODE_TYPE = {
-  [ETravelModeType.DRIVING]: 'driving',
-  [ETravelModeType.WALKING]: 'walking',
-  [ETravelModeType.PLANE]: 'plane',
-  [ETravelModeType.FERRY]: 'ferry',
-};
+// export
+// enum EPathSegmentType {
+//   POINT_OF_INTEREST,
+//   ROAD
+// }
+//
+// export
+// const PATH_SEGMENT_TYPE = {
+//   [EPathSegmentType.POINT_OF_INTEREST]: 'poi',
+//   [EPathSegmentType.ROAD]: 'road'
+// };
+//
+// export
+// enum ETravelModeType {
+//   DRIVING,
+//   WALKING,
+//   PLANE,
+//   FERRY
+// }
+//
+// export
+// const TRAVEL_MODE_TYPE = {
+//   [ETravelModeType.DRIVING]: 'driving',
+//   [ETravelModeType.WALKING]: 'walking',
+//   [ETravelModeType.PLANE]: 'plane',
+//   [ETravelModeType.FERRY]: 'ferry',
+// };
 
 export interface IPoint {
   lat: number;
@@ -47,15 +47,15 @@ export interface IPathSegmentStory {
 }
 
 export interface IPathSegmentRoad {
-  pathType: EPathSegmentType;
+  pathType: string;
   start: IPoint;
   end: IPoint;
-  travelType: ETravelModeType;
+  travelType: string;
   story: IPathSegmentStory;
 }
 
 export interface IPathSegmentPoi {
-  pathType: EPathSegmentType;
+  pathType: string;
   location: IPathSegmentLocation;
   story: IPathSegmentStory;
 }

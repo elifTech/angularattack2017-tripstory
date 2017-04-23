@@ -2,8 +2,8 @@ import {ICONS} from "../config";
 
 export class PathSegment {
   public editMode: boolean = false;
-  
-  constructor(public map: any, public path: string, public marker: any, public travelMode: string) {
+
+  constructor(public map: any, public path: any[], public marker: any, public travelMode: string) {
   }
 
   moveMarker(fraction) {

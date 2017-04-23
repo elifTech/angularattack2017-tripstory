@@ -6,7 +6,7 @@ export class TravelModelPathSegment extends PathSegment {
   public polyline: any;
   public directionDisplay: any;
 
-  constructor(public map: any, public path: any, public travelMode: string, public marker: any) {
+  constructor(public map: any, public path: any[], public travelMode: string, public marker: any) {
     super(map, path, marker, travelMode);
 
     this.polyline = null;

@@ -2,8 +2,8 @@ import { PathSegment } from './pathSegment.service';
 
 export class FerryPathSegment extends PathSegment {
   public editMode: boolean = false;
-  
-  constructor(public map: any, public path: string, public marker: any) {
+
+  constructor(public map: any, public path: any[], public marker: any) {
     super(map, path, marker, 'ferry');
   }
 

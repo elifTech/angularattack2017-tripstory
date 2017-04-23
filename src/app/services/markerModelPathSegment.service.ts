@@ -1,5 +1,4 @@
 import { ICONS } from '../config';
-import { ETravelModeType } from '../interfaces';
 import { PathSegment } from './pathSegment.service';
 import { PathScroller } from './pathScroller.service';
 

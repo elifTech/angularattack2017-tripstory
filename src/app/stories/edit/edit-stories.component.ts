@@ -120,25 +120,26 @@ export class EditStoriesComponent implements OnInit {
   // ----------------------------------------------------EDIT------------------------------------------------------
 
   public onSubmit() {
-    const geocoder = new google.maps.Geocoder();
+    // const geocoder = new google.maps.Geocoder();
+    //
+    // geocoder.geocode({'address': this.model.startPoint.address}, (results, status) => {
+    //   if (status == google.maps.GeocoderStatus.OK) {
+    //     console.info(results)
+    //     /*
+    //      //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
+    //      map.setCenter( results[0].geometry.location );
+    //      var marker = new google.maps.Marker( {
+    //      map     : map,
+    //      position: results[0].geometry.location
+    //      } );*/
+    //   } else {
+    //     // alert( 'Geocode was not successful for the following reason: ' + status );
+    //   }
+    // });
 
-    geocoder.geocode({'address': this.model.startPoint.address}, (results, status) => {
-      if (status == google.maps.GeocoderStatus.OK) {
-        console.info(results)
-        /*
-         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-         map.setCenter( results[0].geometry.location );
-         var marker = new google.maps.Marker( {
-         map     : map,
-         position: results[0].geometry.location
-         } );*/
-      } else {
-        // alert( 'Geocode was not successful for the following reason: ' + status );
-      }
-    });
-
-    let story = this.storyRes.create(this.model).subscribe((ret: IStory) => {
-      this.router.navigate(['/stories/' + ret._id]);
+    let story = this.storyRes.save(this.model).subscribe((ret: IStory) => {
+      console.log('is correct', ret._id);
+      // this.router.navigate(['/stories/' + ret._id]);
     });
     console.info(story);
   }
@@ -151,14 +152,9 @@ export class EditStoriesComponent implements OnInit {
   }
 
   public onPointHover(point) {
-    // console.log('point hovered', point);
     if(point.location) {
       this.map.setCenter( point.location.point );
     }
-    // var marker = new google.maps.Marker( {
-    //   map     : this.appState.state.map,
-    //   position: item.path[0].geometry.location
-    // } );
   }
 
   public getPointsByAddress(data) {

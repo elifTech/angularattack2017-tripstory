@@ -69,6 +69,7 @@ export interface IFile {
 export interface IStory {
   _id?: string;
   title?: string;
+  description?: string;
   subheader?: string;
   coverPhoto?: string;
 

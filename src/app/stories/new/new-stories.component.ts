@@ -9,7 +9,13 @@ import { StoryRes } from '../../services/stories.resource';
 import { UPLOAD_URL } from '../../config';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
+import Rx from 'rxjs/Rx';
 import 'rxjs/add/operator/startWith';
+
+// Import RxJs required methods
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 
 
 @Component({
@@ -88,6 +94,24 @@ export class NewStoriesComponent implements OnInit {
     'Three'
   ];
   filteredOptions: Observable<string[]>;
+
+  // Fetch all existing comments
+  // getPoint(req: string) : Observable<any[]> {
+  // //   console.log('req', req);
+  // //
+  //   return Rx.Observable.fromPromise(this.geocodePoint(req));
+  // //   // return subscription
+  // //   //   .subscribe(res => res, error => error);
+  // //   // ...using get request
+  // //   // return this.geocodePoint(req)
+  // //   //   .then((response: any) => response);
+  // //
+  // //   // ...and calling .json() on the response to return data
+  // //   //   .map((res:Response) => res.json())
+  // //   //   //...errors if any
+  // //   //   .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  // //
+  // }
 
   public hasBaseDropZoneOver: boolean = false;
 
@@ -205,17 +229,59 @@ export class NewStoriesComponent implements OnInit {
   }
 
   public onSubmit() {
-    const geocoder = new google.maps.Geocoder();
+    // const geocoder = new google.maps.Geocoder();
+    //
+    // geocoder.geocode( { 'address' : this.model.startPoint.address }, ( results, status ) => {
+    //   if( status == google.maps.GeocoderStatus.OK ) {
+    //     console.info(results);
+    //     // this.model.startPoint.point = {
+    //     //   lat: results[0].geocode.location.lat(),
+    //     //   lng: results[0].geocode.location.len()
+    //     // };
+    //   }
+    //
+    // } );
 
-    geocoder.geocode( { 'address' : this.model.startPoint.address }, ( results, status ) => {
-      if( status == google.maps.GeocoderStatus.OK ) {
-        console.info(results);
-      }
-    } );
 
-    let story = this.storyRes.create(this.model).subscribe((ret: IStory) => {
-      this.router.navigate(['/stories/' + ret._id]);
-    });
+    const coordsPromises = [ new Promise((resolve, reject) => {
+      this.geocodePoint(this.model.startPoint).then((coords: any) => {
+        if(!coords || !coords.length) {
+          return reject(`Not found: ${this.model.startPoint.address}`);
+        }
+
+        const point = {
+          lat: coords[0].geometry.location.lat(),
+          lng: coords[0].geometry.location.lng()
+        };
+
+        resolve(point);
+      });
+    }),
+    new Promise((resolve, reject) => {
+      this.geocodePoint(this.model.endPoint).then((coords: any) => {
+        if(!coords || !coords.length) {
+          return reject(`Not found: ${this.model.endPoint.address}`);
+        }
+
+        const point = {
+          lat: coords[0].geometry.location.lat(),
+          lng: coords[0].geometry.location.lng()
+        };
+
+        resolve(point);
+      });
+    }) ];
+    Promise.all(coordsPromises)
+      .then((endpoints: any) => {
+        this.model.startPoint.point = endpoints[0];
+        this.model.endPoint.point = endpoints[1];
+
+
+        console.log('this.model.endPoint', this.model);
+        let story = this.storyRes.create(this.model).subscribe((ret: IStory) => {
+          this.router.navigate(['/stories/' + ret._id]);
+        });
+      });
   }
 
 
@@ -230,7 +296,7 @@ export class NewStoriesComponent implements OnInit {
         });
   }
 
-  private geocodePoint(point) {
+  geocodePoint(point) {
     return new Promise((resolve, reject) => {
       const geocoder = new google.maps.Geocoder();
 

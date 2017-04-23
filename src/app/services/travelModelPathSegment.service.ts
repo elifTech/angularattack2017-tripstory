@@ -22,7 +22,7 @@ export class TravelModelPathSegment extends PathSegment {
       destination: this.path[1],
       travelMode: this.travelMode.toUpperCase()
     };
-    
+
     return new Promise((resolve, reject) => {
       const rendererOptions = {
         map: this.map,
@@ -100,7 +100,8 @@ export class TravelModelPathSegment extends PathSegment {
   }
 
   moveMarker(fraction) {
-    const pathLength = Math.round(google.maps.geometry.spherical.computeLength(this.polyline.getPath().getArray()));
+    // const pathLength = Math.round(google.maps.geometry.spherical.computeLength(this.polyline.getPath().getArray()));
+    const pathLength = Math.round(google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(this.path[0]), new google.maps.LatLng(this.path[1])));
     const pos = pathLength * fraction / 100;
 
     const p = this.polyline.GetPointAtDistance(pos);

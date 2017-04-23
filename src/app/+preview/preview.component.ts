@@ -132,7 +132,7 @@ export class PreviewComponent implements OnInit {
     let currentSection;
     let fraction;
     this.sectionsBounds.forEach((item, index) => {
-      // console.log(`${index}: item.top: ${item.top}, item.bottom: ${item.top + item.height}, scrollTop: ${scrollTop}`);
+       console.log(`${index}: item.top: ${item.top}, item.bottom: ${item.top + item.height}, scrollTop: ${scrollTop}`);
       if (scrollTop >= (item.top) && scrollTop <= (item.top + item.height)) {
         currentSectionIndex = index;
         //  - this.sectionsBounds[0].topg
@@ -147,6 +147,7 @@ export class PreviewComponent implements OnInit {
     console.log(`currentSectionIndex: ${currentSectionIndex}, fraction: ${fraction}`);
 
     if (currentSectionIndex !== undefined && fraction) {
+      console.info('moveMarker', currentSectionIndex, fraction)
       this.scroller.pathSegments[currentSectionIndex].moveMarker(fraction);
     }
   }

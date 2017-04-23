@@ -7,11 +7,11 @@
 
     <div *ngIf="model">
       <div *ngFor='let path of model.path'>
-        <div *ngIf="path.pathType == 'poi'">
+        <div *ngIf="path.pathType == 'poi'" class="point">
           <h2>
             {{path.title}}
           </h2>
-          <div>
+          <div style="white-space: pre-line;">
             {{path.body}}
           </div>
           <figure *ngIf="path.files">

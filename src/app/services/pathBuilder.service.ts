@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { PlanePathSegment } from './planePathSegment.service';
 import { FerryPathSegment } from './ferryPathSegment.service';
 import { DrivingModelPathSegment } from './drivingModelPathSegment.service';
@@ -35,7 +36,7 @@ export class PathBuilder {
 
         const SegmentTypeInstance = PathBuilder.getPathSegmentTypeInstance(item.travelType);
         SegmentTypeInstance.editMode = true;
-        return new SegmentTypeInstance(this.map, [item.start, item.end], marker);
+        return new SegmentTypeInstance(this.map, [item.start || null, item.end || null], marker);
       }
     });
 

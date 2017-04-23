@@ -3,7 +3,10 @@ import {
   OnInit,
 } from '@angular/core';
 import {IStory, EPathSegmentType, ETravelModeType} from "../interfaces";
+import {PREVIEW_MAP_STYLES} from "../config";
 import { PathScroller } from '../services/pathScroller.service';
+import { StoryRes } from '../services/stories.resource';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'preview',
@@ -14,6 +17,7 @@ import { PathScroller } from '../services/pathScroller.service';
   ]
 })
 export class PreviewComponent implements OnInit {
+  private sub: any;
   public story:IStory;
 
   public scroller: PathScroller;
@@ -21,7 +25,18 @@ export class PreviewComponent implements OnInit {
   private sections: any;
   private sectionsBounds: any;
 
+  public model: IStory = {
+    startPoint: {},
+    endPoint: {},
+    images: []
+  };
+
+  constructor(private route: ActivatedRoute, private storyRes: StoryRes) {
+  }
+
   public ngOnInit() {
+
+
     const pathPieces = [
       {
         type: 'walking',
@@ -37,158 +52,8 @@ export class PreviewComponent implements OnInit {
       }
     ];
 
-    const mapStyle = [
-      {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#50492e"
-          },
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.locality",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "hue": "#ffcc00"
-          },
-          {
-            "saturation": "35"
-          },
-          {
-            "lightness": "1"
-          },
-          {
-            "gamma": "1.00"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape.natural.landcover",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#fbf9f1"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#fbf9f1"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#c9f1d9"
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-          {
-            "saturation": -100
-          },
-          {
-            "lightness": 45
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-          {
-            "color": "#46bcec"
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#ffffff"
-          }
-        ]
-      }
-    ];
-
     const startPoint = pathPieces[0].path[0];
-    var myOptions = {
-      zoom: 8,
-      center: startPoint,
-      scrollwheel: false,
-      navigationControl: false,
-      mapTypeControl: false,
-      scaleControl: false,
-      draggable: false,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: mapStyle
-    };
 
-    const map = new google.maps.Map(document.getElementById("map"), myOptions);
-
-    this.scroller = new PathScroller(map, pathPieces);
-    this.scroller.init();
 
     this.story = {
       title: 'The Wild Path',
@@ -223,19 +88,46 @@ export class PreviewComponent implements OnInit {
         }
       ]
     };
+    
+    this.sub = this.route.params.subscribe(params => {
+      this.storyRes.get(params['id']).subscribe((item: IStory) => {
+        this.model = item;
 
-    this.sections = Array.from(document.querySelectorAll('.point'));
-    this.sectionsBounds = this.sections.map(section => {
-      const bounds = section.getBoundingClientRect();
-      return {
-        top:bounds.top,
-        bottom:bounds.bottom,
-        left:bounds.left,
-        right:bounds.right,
-        height:bounds.height,
-        width:bounds.width,
-      }
+        var myOptions = {
+          zoom: 8,
+          center: startPoint,
+          scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          draggable: false,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          styles: PREVIEW_MAP_STYLES
+        };
+
+        const map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        this.scroller = new PathScroller(map, pathPieces);
+        this.scroller.init();
+        
+        this.sections = Array.from(document.querySelectorAll('.point'));
+        this.sectionsBounds = this.sections.map(section => {
+          const bounds = section.getBoundingClientRect();
+          return {
+            top:bounds.top,
+            bottom:bounds.bottom,
+            left:bounds.left,
+            right:bounds.right,
+            height:bounds.height,
+            width:bounds.width,
+          }
+        });
+      });
     });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   public onWindowScroll(event) {

@@ -140,7 +140,6 @@ export class EditStoriesComponent implements OnInit {
 
   public onEdit(model: any) {
     this.editablePoint = null;
-    console.log('MODEL', model);
     this.initEditableForm();
     this.editablePoint = model || {};
 

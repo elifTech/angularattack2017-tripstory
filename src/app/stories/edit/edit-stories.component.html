@@ -54,7 +54,7 @@
     </div>
   </div>
   <div class="new-point">
-    <a class="upload-photos" (click)="onEdit()">
+    <a class="upload-photos" (click)="onEdit(null)">
       <div class="icon-wrapper">
         <md-icon>add</md-icon>
       </div>
@@ -101,7 +101,7 @@
     <div class="form-group">
       <md-input-container>
 
-        <textarea mdInput placeholder="Story title" [(ngModel)]="editablePoint.body"
+        <textarea mdInput placeholder="Story body" [(ngModel)]="editablePoint.body"
                name="title"></textarea>
         <md-hint>
           Some little story about this location

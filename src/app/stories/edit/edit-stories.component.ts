@@ -32,8 +32,10 @@ export class EditStoriesComponent implements OnInit {
 
   public ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.storyRes.get({ id: +params['id'] }).$observable.subscribe((item: IStory) => {
+      console.info(params);
+      this.storyRes.get({ id: params['id'] }).$observable.subscribe((item: IStory) => {
         this.model = item;
+        console.info(item)
       });
     });
 

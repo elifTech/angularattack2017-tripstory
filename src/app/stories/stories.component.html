@@ -1,19 +1,31 @@
 <div class="stories-page">
-
-
-
-  <a href="" [routerLink]="['/stories/new']">New story</a>
-
-
-  <div>
-    List
+  <div class="maps-container">
+    <div class="backdrop"></div>
+    <div class="map" id="map"></div>
   </div>
 
+  <div class="data-container">
+
+    <div class="nav-menu">
+      <div class="nav-button">
+        <a href="" [routerLink]="['/stories']">Your stories</a>
+        <a href="" [routerLink]="['/stories/new']">New story</a>
+      </div>
+      <div class="logo">
+        <span class="pulse-button"></span>
+      </div>
+      <div class="nav-button">
+        <a href="" [routerLink]="['/stories']">About us</a>
+        <a href="" (click)="logout()">Logout</a>
+      </div>
+    </div>
 
   <div *ngFor="let story of storyList">
     {{story.title}}
   </div>
 
   <router-outlet></router-outlet>
+
+  </div>
 
 </div>

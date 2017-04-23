@@ -12,45 +12,42 @@
   </div>
 
   <div class="line"></div>
-  <div class="path">
-
-    <a class="path-select">
-      <md-icon>directions_car</md-icon>
-    </a>
-
-  </div>
-  <div class="point">
-      <div class="point-content">
-        <span class="location">{{model.subheader}}</span>
-        <span class="title">{{model.title}}</span>
+  <div *ngFor="let path of model.path" [ngClass]="{'path': path.pathType === 'path', 'point': path.pathType === 'poi'}">
+    <div class="point-content" *ngIf="path.pathType === 'poi'">
+      <div style="position: absolute; right: 12px; top: 12px; width: 16px; height: 16px; cursor: pointer">
+        <md-icon style="color: #c2c2c2; font-size: 16px;">edit</md-icon>
       </div>
-  </div>
-  <div class="point">
-
-  </div>
-  <div class="point">
-
-  </div>
-  <div class="point">
-
-  </div>
-  <div class="point">
-
-  </div>
-  <div class="point">
-
-  </div>
-  <div class="point">
-
-  </div>
-  <div class="point">
-
-  </div>
-  <div class="point">
-
+      <!--<span class="location">{{path.subheader}}</span>-->
+      <span class="title">
+        {{path.location.point.lat}} {{path.location.point.lng}}
+      </span>
+      <div style="display: flex; flex-direction: row; justify-content: space-between; color: #3c474b">
+        <div style="flex: 1; display: flex">
+          <md-icon>keyboard</md-icon>
+          <span style="padding-left: 8px">story</span>
+        </div>
+        <div style="flex: 1; display: flex">
+          <md-icon>photo_camera</md-icon>
+          <span style="padding-left: 8px">{{path.files.length}} photos</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="path.pathType === 'path'">
+      <a class="path-select">
+        <md-icon *ngIf="path.travelType === 'driving'">directions_car</md-icon>
+        <md-icon *ngIf="path.travelType === 'walking'">walking</md-icon>
+        <md-icon *ngIf="path.travelType === 'ferry'">ferry</md-icon>
+        <md-icon *ngIf="path.travelType === 'plain'">plain</md-icon>
+      </a>
+      <div>
+        <div *ngFor="let file of path.files">
+          <img src="{{file.path}}" width="72" height="56" />
+          <span>{{file.title}}</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="new-point">
-
 
   </div>
 

@@ -9,7 +9,6 @@ import { StoryRes } from '../../services/stories.resource';
 import { UPLOAD_URL } from '../../config';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import Rx from 'rxjs/Rx';
 import 'rxjs/add/operator/startWith';
 
 // Import RxJs required methods

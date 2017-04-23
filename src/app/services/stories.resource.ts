@@ -11,7 +11,7 @@ export class StoryRes {
   }
 
   query(): Observable<IStory[]> {
-    return this.http.get(`${API_URL}/api/stories`)
+    return this.http.get(`${API_URL}/api/stories?sort=-createDate`)
       .map(this.extractData);
   }
 

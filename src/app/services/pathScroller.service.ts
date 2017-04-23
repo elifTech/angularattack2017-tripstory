@@ -1,12 +1,8 @@
+import { ICONS } from '../config';
 import { PlanePathSegment } from './planePathSegment.service';
 import { FerryPathSegment } from './ferryPathSegment.service';
 import { DrivingModelPathSegment } from './drivingModelPathSegment.service';
 import { WalkingModelPathSegment } from './walkingModelPathSegment.service';
-
-import walkingIcon from '../icons/walking.png';
-import planeIcon from '../icons/plane.png';
-import drivingIcon from '../icons/driving.png';
-import ferryIcon from '../icons/ferry.png';
 
 export class PathScroller {
   protected pathLength: number;
@@ -14,13 +10,6 @@ export class PathScroller {
   public pathLengths: any;
   protected marker: any;
   public pathSegments: any;
-
-  public static icons = {
-    walking: walkingIcon,
-    plane: planeIcon,
-    driving: drivingIcon,
-    ferry: ferryIcon,
-  };
 
   constructor(public map: any, public pathPieces: Array<any>) {
   }
@@ -30,7 +19,7 @@ export class PathScroller {
       map: this.map
     });
     this.initRoutes();
-    this.marker.setIcon(PathScroller.icons[this.pathPieces[0].type]);
+    this.marker.setIcon(ICONS[this.pathPieces[0].type]);
     this.marker.setPosition(this.pathPieces[0].path[0]);
   }
 

@@ -8,6 +8,7 @@ import { IStory } from '../../interfaces';
 import { StoryRes } from '../../services/stories.resource';
 import { UPLOAD_URL, MAP_STYLES, API_URL } from '../../config';
 import { AppState } from '../../app.service';
+import { PathBuilder } from '../../services/pathBuilder.service';
 
 @Component({
   selector: 'edit-stories',
@@ -32,6 +33,12 @@ export class EditStoriesComponent implements OnInit {
   public coverPhoto;
 
   public editablePoint = null;
+
+  public buildMap(story:IStory, map:any) {
+    const builder = new PathBuilder(map, story);
+    console.info('buildMap');
+    builder.init();
+  }
 
   constructor(public route: ActivatedRoute, private storyRes: StoryRes, private router: Router, public appState: AppState) {
   }
@@ -65,6 +72,7 @@ export class EditStoriesComponent implements OnInit {
             styles: mapStyle
           };
           const map = new google.maps.Map(document.getElementById("map"), myOptions);
+          this.buildMap(item, map);
         }
         // this.appState.state.map.setCenter( item.path[0].geometry.location );
         // var marker = new google.maps.Marker( {

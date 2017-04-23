@@ -1,5 +1,18 @@
 import { CustomConfig } from 'ng2-ui-auth';
 
+import walkingIcon from '../assets/icons/walking.png';
+import planeIcon from '../assets/icons/plane.png';
+import drivingIcon from '../assets/icons/driving.png';
+import ferryIcon from '../assets/icons/ferry.png';
+
+export 
+const ICONS = {
+  walking: walkingIcon,
+  plane: planeIcon,
+  driving: drivingIcon,
+  ferry: ferryIcon,
+};
+
 export const IS_DEV = ENV === 'development';
 
 export const API_URL = IS_DEV ? 'http://localhost:4040' : 'https://eliftech-tripstory.herokuapp.com';
@@ -9,6 +22,8 @@ export const UPLOAD_URL = `${API_URL}/api/upload`;
 export const FACEBOOK_APP_ID = IS_DEV ? '418197618334612' : '1876751672543517';
 
 export const GOOGLE_CLIENT_ID = '616075536950-pauau0e7u0c980llqh99ftvg3sd32c61.apps.googleusercontent.com';
+
+
 
 export const MAP_STYLES = [
   {

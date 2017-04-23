@@ -1,4 +1,5 @@
-import { ETravelModeType } from '../../interfaces';
+import { ICONS } from '../config';
+import { ETravelModeType } from '../interfaces';
 import { PathSegment } from './pathSegment.service';
 import { PathScroller } from './pathScroller.service';
 
@@ -36,20 +37,29 @@ export class TravelModelPathSegment extends PathSegment {
           const startLocation: any = {};
           const endLocation: any = {};
 
-          const polyline = new google.maps.Polyline({
-            path: [],
-            strokeOpacity: 0,
-            map: this.map,
-            icons: [{
-              icon: {
-                path: 'M 0,-1 0,1',
-                strokeOpacity: 0.5,
-                scale: 2
-              },
-              offset: '0',
-              repeat: '20px'
-            }],
-          });
+          let polyline = null;
+          if (this.editMode) {
+            polyline = new google.maps.Polyline({
+              path: [],
+              strokeOpacity: 0,
+              map: this.map,
+              icons: [{
+                icon: {
+                  path: 'M 0,-1 0,1',
+                  strokeOpacity: 0.5,
+                  scale: 2
+                },
+                offset: '0',
+                repeat: '20px'
+              }],
+            });
+          } else {
+            polyline = new google.maps.Polyline({
+              path: [],
+              strokeColor: "#FF0000",
+              map: this.map
+            });
+          }
 
           // For each route, display summary information.
           const legs = route.legs;
@@ -98,6 +108,6 @@ export class TravelModelPathSegment extends PathSegment {
 
     this.marker.setPosition(p);
     this.map.setCenter(p);
-    this.marker.setIcon(PathScroller.icons[this.travelMode]);
+    this.marker.setIcon(ICONS[this.travelMode]);
   }
 }

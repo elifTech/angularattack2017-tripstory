@@ -1,5 +1,5 @@
 import { PathSegment } from './pathSegment.service';
-import {ETravelModeType} from "../../interfaces";
+import {ETravelModeType} from "../interfaces";
 
 export class FerryPathSegment extends PathSegment {
   constructor(public map: any, public path: string, public marker: any) {

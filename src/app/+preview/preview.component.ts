@@ -3,7 +3,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {IStory, EPathSegmentType, ETravelModeType} from "../interfaces";
-import { PathScroller } from './services/pathScroller.service';
+import { PathScroller } from '../services/pathScroller.service';
 
 @Component({
   selector: 'preview',

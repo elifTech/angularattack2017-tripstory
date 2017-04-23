@@ -57,13 +57,26 @@
 
       <div class="image-block">
         <div class="img-container" *ngFor="let image of model.images">
+          <div class="location" *ngIf="image.geo && image.geo.lat">
+          <md-icon>room</md-icon>
+          </div>
 
           <img src="{{image.url}}"  name="path" height="70" width="90">
-          <a (click)="removeFile(image)">X</a>
+          <a (click)="removeFile(image)" class="remove">
+            <md-icon>close</md-icon>
+          </a>
         </div>
       </div>
-      <input type="file" ng2FileSelect [uploader]="uploader" multiple/><br/>
+      <br/>
+      <input type="file" ng2FileSelect [uploader]="uploader" multiple/>
+      <br/>
+      <br/>
+      <md-hint>
+      Upload your trip photos and if they contain information about location we group it and create a route for story with points of interest.
+      </md-hint>
 
+      <br/>
+      <br/>
 
       <div class="form-actions">
         <button type="submit" md-raised-button>Create</button>

@@ -30,5 +30,25 @@
         width: 100%;
       }
     }
+    .img-container {
+      position: relative;
+      display: inline-block;
+      margin: 3px 5px;
+
+      .remove {
+        position: absolute;
+        color: red;
+        text-shadow: 0 0 5px #fff;
+        top: -3px;
+        right: -3px;
+      }
+      .location {
+        left: 3px;
+        bottom: 3px;
+        color: #fff;
+        position: absolute;
+        text-shadow: 0 0 5px #000;
+      }
+    }
   }
 }

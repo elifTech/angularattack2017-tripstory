@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { AuthService } from 'ng2-ui-auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { API_URL } from '../../config';
 import { IStory } from '../../interfaces';
 import { StoryRes } from '../../services/stories.resource';
 
@@ -26,7 +27,12 @@ export class ListStoriesComponent implements OnInit {
 
   public ngOnInit() {
     this.storyRes.query().subscribe((stories: IStory[]) => {
-       this.storyList = stories;
+       this.storyList = stories.map(item => {
+         if (item.images && item.images.length) {
+           item.coverPhoto = `${API_URL}/${item.images[0].path}`;
+         }
+         return item;
+       });
     });
   }
 

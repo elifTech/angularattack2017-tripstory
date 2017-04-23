@@ -11,6 +11,7 @@ import { AppState } from '../../app.service';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
+import { PathBuilder } from '../../services/pathBuilder.service';
 
 @Component({
   selector: 'edit-stories',
@@ -41,6 +42,12 @@ export class EditStoriesComponent implements OnInit {
   public coverPhoto;
 
   public editablePoint = null;
+
+  public buildMap(story:IStory, map:any) {
+    const builder = new PathBuilder(map, story);
+    console.info('buildMap');
+    builder.init();
+  }
 
   constructor(public route: ActivatedRoute, private storyRes: StoryRes, private router: Router, public appState: AppState) {
   }
@@ -74,6 +81,7 @@ export class EditStoriesComponent implements OnInit {
             styles: mapStyle
           };
           const map = new google.maps.Map(document.getElementById("map"), myOptions);
+          this.buildMap(item, map);
         }
         // this.appState.state.map.setCenter( item.path[0].geometry.location );
         // var marker = new google.maps.Marker( {

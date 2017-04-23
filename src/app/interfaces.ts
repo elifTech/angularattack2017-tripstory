@@ -70,11 +70,12 @@ export interface IStory {
   _id?: string;
   title?: string;
   subheader?: string;
+  coverPhoto?: string;
 
   startPoint?: IPathSegmentLocation,
   endPoint?: IPathSegmentLocation,
 
-  path?: (IPathSegmentPoi | IPathSegmentRoad)[];
+  path?: any;//(IPathSegmentPoi | IPathSegmentRoad)[];
 
   images?: Array<IFile>
 }

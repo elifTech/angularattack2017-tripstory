@@ -19,7 +19,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MdGridListModule,
-  MdButtonModule, MdListModule, MdInputModule, MdRadioModule, MdAutocompleteModule } from '@angular/material';
+  MdButtonModule, MdListModule, MdInputModule, MdRadioModule, MdAutocompleteModule, MdIconModule } from '@angular/material';
 
 import { Ng2UiAuthModule } from 'ng2-ui-auth';
 import { MyAuthConfig } from './config';
@@ -79,6 +79,7 @@ type StoreType = {
     MdInputModule,
     MdRadioModule,
     MdAutocompleteModule,
+    MdIconModule,
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,

@@ -1,37 +1,23 @@
 <div class="stories-page">
   <div class="maps-container">
-    <div class="backdrop"></div>
+    <div class="backdrop" *ngIf="routeIsActive('/stories') || routeIsActive('/stories/new')"></div>
     <div class="map" id="map"></div>
   </div>
 
-  <div class="data-container">
-
-    <div class="nav-menu">
-      <div class="nav-button left">
-        <a href="" [routerLink]="['/stories']" [class.active]="routeIsActive('/stories')">Stories</a>
-        <a href="" [routerLink]="['/stories/new']" [class.active]="routeIsActive('/stories/new')">New story</a>
-      </div>
-      <div class="logo">
-        <span class="pulse-button"></span>
-      </div>
-      <div class="nav-button right">
-        <a href="" [routerLink]="['/about']" [routerLinkActive]="['active']">About us</a>
-        <a href="" (click)="logout()">Logout</a>
-      </div>
+  <div class="nav-menu" style="">
+    <div class="nav-button left">
+      <a href="" [routerLink]="['/stories']" [class.active]="routeIsActive('/stories')">Stories</a>
+      <a href="" [routerLink]="['/stories/new']" [class.active]="routeIsActive('/stories/new')">New story</a>
     </div>
-
-    <div class="stories-container">
-      <div *ngFor="let story of storyList" class="story-container">
-        <div class="image-container">
-          <img src="https://scontent.fnic1-1.fna.fbcdn.net/v/t31.0-8/17807482_1002697196532567_7944031912616663507_o.jpg?oh=e150a9ee9873d5a62b2723219bfa0033&oe=599498ED" />
-        </div>
-
-        {{story.title}}
-      </div>
-
-      <router-outlet></router-outlet>
+    <div class="logo">
+      <span class="pulse-button"></span>
     </div>
-
+    <div class="nav-button right">
+      <a href="" [routerLink]="['/about']" [routerLinkActive]="['active']">About us</a>
+      <a href="" (click)="logout()">Logout</a>
+    </div>
   </div>
+
+  <router-outlet></router-outlet>
 
 </div>

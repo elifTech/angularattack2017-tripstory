@@ -1,48 +1,52 @@
-<div class="stories-page">
-  <a href="" [routerLink]="['/stories']">Back</a>
-
+<div class="stories-page" style="width: 300px; position: relative; z-index: 10">
   <div>
-    New
-  </div>
+    <div class="edit-container">
+      <a href="" [routerLink]="['/stories']">Back</a>
 
-  <div class="container">
-    <h1>Hero Form</h1>
-    <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
-
-      <div class="form-group">
-        <md-input-container>
-
-        <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="model.title" name="title" required>
-
-        </md-input-container>
-
-        <md-input-container>
-
-        <input mdInput placeholder="Start point" type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>
-
-        </md-input-container>
-
-        <md-input-container>
-
-        <input mdInput placeholder="End point" type="text" class="form-control" [(ngModel)]="model.endPoint.address" name="endPoint" required>
-
-        </md-input-container>
-
-
-        <div ng2FileDrop
-             [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-             (fileOver)="fileOverBase($event)"
-             [uploader]="uploader"
-             class="well my-drop-zone">
-          Base drop zone
-        </div>
-
-        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
-
+      <div>
+        New
       </div>
 
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
+      <div class="container">
+        <h1>Hero Form</h1>
 
+        <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <md-input-container>
+
+              <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="model.title" name="title" required>
+
+            </md-input-container>
+
+            <md-input-container>
+
+              <input mdInput placeholder="Start point" type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>
+
+            </md-input-container>
+
+            <md-input-container>
+
+              <input mdInput placeholder="End point" type="text" class="form-control" [(ngModel)]="model.endPoint.address" name="endPoint" required>
+
+            </md-input-container>
+
+
+            <div ng2FileDrop
+                 [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                 (fileOver)="fileOverBase($event)"
+                 [uploader]="uploader"
+                 class="well my-drop-zone">
+              Base drop zone
+            </div>
+
+            <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

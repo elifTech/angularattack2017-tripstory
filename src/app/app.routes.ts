@@ -5,6 +5,7 @@ import { StoriesComponent } from './stories';
 import { AboutComponent } from './about';
 import { NewStoriesComponent } from './stories/new';
 import { EditStoriesComponent } from './stories/edit';
+import { ListStoriesComponent } from './stories/list';
 import { AuthGuard } from './services/auth.guard';
 
 import { DataResolver } from './app.resolver';
@@ -21,7 +22,8 @@ export const ROUTES: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'new', component: NewStoriesComponent },
-      { path: ':id', component: EditStoriesComponent }
+      { path: ':id', component: EditStoriesComponent },
+      { path: '', component: ListStoriesComponent },
     ]
   },
   {path: 'preview', loadChildren: './+preview#PreviewModule'},

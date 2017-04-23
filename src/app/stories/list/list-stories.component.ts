@@ -4,20 +4,19 @@ import {
 } from '@angular/core';
 import { AuthService } from 'ng2-ui-auth';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IStory } from '../interfaces';
-import { StoryRes } from '../services/stories.resource';
+import { IStory } from '../../interfaces';
+import { StoryRes } from '../../services/stories.resource';
 
 @Component({
-  selector: 'stories',
+  selector: 'list-stories',
   styleUrls: [
-    './stories.component.scss'
+    './list-stories.component.scss'
   ],
-  templateUrl: './stories.component.html'
+  templateUrl: './list-stories.component.html'
 })
-export class StoriesComponent implements OnInit {
+export class ListStoriesComponent implements OnInit {
 
   storyList: IStory[] = [];
-  public showBackdrop:boolean = true;
 
   constructor(public route: ActivatedRoute,
               private storyRes: StoryRes,
@@ -26,7 +25,6 @@ export class StoriesComponent implements OnInit {
   }
 
   public ngOnInit() {
-    // this.showBackdrop = this.routeIsActive('/stories');
     this.storyRes.query().subscribe((stories: IStory[]) => {
        this.storyList = stories;
     });

@@ -39,6 +39,7 @@ import { LoginComponent } from './login';
 import { StoriesComponent } from './stories';
 import { NewStoriesComponent } from './stories/new';
 import { EditStoriesComponent } from './stories/edit';
+import { ListStoriesComponent } from './stories/list';
 import { NoContentComponent } from './no-content';
 
 import '../styles/styles.scss';
@@ -68,6 +69,7 @@ type StoreType = {
     StoriesComponent,
     NewStoriesComponent,
     EditStoriesComponent,
+    ListStoriesComponent,
     NoContentComponent
   ],
   imports: [ // import Angular's modules

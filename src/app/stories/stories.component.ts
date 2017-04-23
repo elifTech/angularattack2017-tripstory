@@ -6,6 +6,8 @@ import { AuthService } from 'ng2-ui-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IStory } from '../interfaces';
 import { StoryRes } from '../services/stories.resource';
+import { AppState } from '../app.service';
+import { MAP_STYLES } from '../config';
 
 @Component({
   selector: 'stories',
@@ -19,92 +21,14 @@ export class StoriesComponent implements OnInit {
   storyList: IStory[] = [];
 
   constructor(public route: ActivatedRoute,
+              public appState: AppState,
               private storyRes: StoryRes,
               private router: Router,
               private auth: AuthService) {
   }
 
   public ngOnInit() {
-    const mapStyle = [
-      {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#444444"
-          }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-          {
-            "color": "#f2f2f2"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-          {
-            "saturation": -100
-          },
-          {
-            "lightness": 45
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-          {
-            "color": "#20beff"
-          },
-          {
-            "visibility": "on"
-          }
-        ]
-      }
-    ];
+    const mapStyle = MAP_STYLES;
 
     var vinnitsa = new google.maps.LatLng(49.2325477, 28.4744695);
 

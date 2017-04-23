@@ -12,9 +12,9 @@
   </div>
 
   <div class="line"></div>
-  <div *ngFor="let path of model.path" [ngClass]="{'path': path.pathType === 'path', 'point': path.pathType === 'poi'}">
+  <div *ngFor="let path of model.path; let i = index;" [ngClass]="{'path': path.pathType === 'path', 'point': path.pathType === 'poi'}">
     <div class="point-content" *ngIf="path.pathType === 'poi'">
-      <div style="position: absolute; right: 12px; top: 12px; width: 16px; height: 16px; cursor: pointer">
+      <div style="position: absolute; right: 12px; top: 12px; width: 16px; height: 16px; cursor: pointer" *ngIf="[0,1].indexOf(i) !== -1">
         <md-icon style="color: #c2c2c2; font-size: 16px;">edit</md-icon>
       </div>
       <!--<span class="location">{{path.subheader}}</span>-->
@@ -54,8 +54,8 @@
   <div class="endpoint">
 
     <span class="text-content">
-      <span class="title">{{model.title}}</span>
-      <span class="subheader">{{model.subheader}}</span>
+      <span class="title">{{model.backTitle || 'Back'}}</span>
+      <span class="subheader">{{model.backSubheader}}</span>
     </span>
   </div>
 </div>

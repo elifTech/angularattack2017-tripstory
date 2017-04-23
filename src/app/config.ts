@@ -2,7 +2,7 @@ import { CustomConfig } from 'ng2-ui-auth';
 
 export const IS_DEV = ENV === 'development';
 
-export const API_URL = IS_DEV ? 'http://localhost:4040' : 'https://eliftech-tripstory.herokuapp.com';
+export const API_URL = IS_DEV ? '' : 'https://eliftech-tripstory.herokuapp.com';
 
 export const UPLOAD_URL = `${API_URL}/api/upload`;
 

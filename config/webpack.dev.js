@@ -235,6 +235,16 @@ module.exports = function (options) {
       watchOptions: {
         aggregateTimeout: 300,
         poll: 1000
+      },
+      proxy: {
+        '/api':{
+          target: 'https://eliftech-tripstory.herokuapp.com',
+          secure: false,
+          onProxyReq: function onProxyReq(proxyReq, req, res) {
+            // add custom header to request
+            proxyReq.setHeader('Host', 'eliftech-tripstory.herokuapp.com');
+          }
+        }
       }
     },
 

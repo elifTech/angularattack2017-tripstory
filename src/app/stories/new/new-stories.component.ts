@@ -19,7 +19,7 @@ export class NewStoriesComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({url: UPLOAD_URL});
 
-  protected model:IStory = {
+  public model:IStory = {
     startPoint: {},
     endPoint: {},
     images: []
@@ -57,7 +57,7 @@ export class NewStoriesComponent implements OnInit {
       }
     } );
 
-    let story = this.storyRes.save(this.model, (ret: IStory) => {
+    let story = this.storyRes.create(this.model).subscribe((ret: IStory) => {
       this.router.navigate(['/stories/' + ret._id]);
     });
   }

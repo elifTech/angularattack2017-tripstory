@@ -25,8 +25,8 @@ export class StoriesComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.storyList = this.storyRes.query((stories: IStory[]) => {
-      console.info(stories);
+    this.storyRes.query().subscribe((stories: IStory[]) => {
+       this.storyList = stories;
     });
 
     const mapStyle = [

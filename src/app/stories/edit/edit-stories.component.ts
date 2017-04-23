@@ -21,7 +21,7 @@ export class EditStoriesComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({url: UPLOAD_URL});
 
-  protected model:IStory = {
+  public model:IStory = {
     startPoint: {},
     endPoint: {},
     images: []
@@ -33,7 +33,7 @@ export class EditStoriesComponent implements OnInit {
   public ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       console.info(params);
-      this.storyRes.get({ id: params['id'] }).$observable.subscribe((item: IStory) => {
+      this.storyRes.get(params['id']).subscribe((item: IStory) => {
         this.model = item;
         console.info(item)
       });
@@ -79,7 +79,7 @@ export class EditStoriesComponent implements OnInit {
       }
     } );
 
-    let story = this.storyRes.save(this.model, (ret: IStory) => {
+    let story = this.storyRes.create(this.model).subscribe((ret: IStory) => {
       this.router.navigate(['/stories/' + ret._id]);
     });
     console.info(story);

@@ -16,7 +16,6 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
-import { ResourceModule } from 'ngx-resource';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MdGridListModule,
@@ -24,6 +23,7 @@ import { MdGridListModule,
 
 import { Ng2UiAuthModule } from 'ng2-ui-auth';
 import { MyAuthConfig } from './config';
+import { StoryRes } from './services/stories.resource';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -81,14 +81,14 @@ type StoreType = {
     FormsModule,
     HttpModule,
     FileUploadModule,
-    ResourceModule.forRoot(),
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     Ng2UiAuthModule.forRoot(MyAuthConfig)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    ROUTER_PROVIDERS
+    ROUTER_PROVIDERS,
+    StoryRes
   ]
 })
 export class AppModule {

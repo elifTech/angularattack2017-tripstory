@@ -36,12 +36,7 @@ export class EditStoriesComponent implements OnInit {
       console.info(params);
       this.storyRes.get(params['id']).subscribe((item: IStory) => {
         this.model = item;
-        console.info(item);
-        // map.setCenter( results[0].geometry.location );
-        // var marker = new google.maps.Marker( {
-        //   map     : map,
-        //   position: results[0].geometry.location
-        // } );
+        console.info(item)
       });
     });
 
@@ -75,7 +70,11 @@ export class EditStoriesComponent implements OnInit {
         console.info(results)
 /*
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-
+        map.setCenter( results[0].geometry.location );
+        var marker = new google.maps.Marker( {
+          map     : map,
+          position: results[0].geometry.location
+        } );*/
       } else {
        // alert( 'Geocode was not successful for the following reason: ' + status );
       }
@@ -86,6 +85,4 @@ export class EditStoriesComponent implements OnInit {
     });
     console.info(story);
   }
-
-  public onChangeAddress
 }

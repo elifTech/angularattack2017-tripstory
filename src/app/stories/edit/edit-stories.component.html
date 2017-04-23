@@ -18,15 +18,15 @@
         <md-icon style="color: #c2c2c2; font-size: 16px;">edit</md-icon>
       </div>
       <!--<span class="location">{{path.subheader}}</span>-->
-      <span class="title" *ngIf="path.location && path.location.title">
-        {{path.location.title}}
+      <span class="title" *ngIf="path.title">
+        {{path.title}}
       </span>
-      <span class="title not-setuped" *ngIf="!path.location || !path.location.title">
-        Fancy new title
+      <span class="title not-setuped" *ngIf="!path.title" style="color: #666; font-size: 14px; padding-bottom: 14px">
+        Click edit to change this title
       </span>
       <div style="display: flex; flex-direction: row; justify-content: space-between; color: #3c474b">
-        <div style="flex: 1; display: flex">
-          <md-icon>keyboard</md-icon>
+        <div style="flex: 1; display: flex" *ngIf="path.body">
+          <md-icon>comment</md-icon>
           <span style="padding-left: 8px">story</span>
         </div>
         <div style="flex: 1; display: flex">
@@ -42,34 +42,34 @@
         <md-icon *ngIf="path.travelType === 'ferry'">ferry</md-icon>
         <md-icon *ngIf="path.travelType === 'plain'">plain</md-icon>
       </a>
-      <div class="path-photos">
+      <!--div class="path-photos">
         <div *ngFor="let file of path.files" class="path-photo-wrapper">
           <img src="{{file.path}}" width="72" height="56" />
           <span class="path-photo-title">{{file.title}}</span>
         </div>
-      </div>
+      </div-->
     </div>
   </div>
   <div class="new-point">
     <a class="upload-photos">
       <div class="icon-wrapper">
-        <md-icon>photo_camera</md-icon>
+        <md-icon>add</md-icon>
       </div>
       <div class="icon-title">
         Add new point
       </div>
     </a>
-    <div class="or">
+    <!--div class="or">
       - or -
     </div>
     <a class="add-new-points">
       <div class="icon-wrapper">
-        <md-icon>add</md-icon>
+        <md-icon>photo_camera</md-icon>
       </div>
       <div class="icon-title">
         Upload photos
       </div>
-    </a>
+    </a-->
   </div>
 
   <div class="endpoint">
@@ -81,59 +81,65 @@
   </div>
 </div>
 
-<div class="edit-stories-editable" *ngIf="editablePoint">
-  <div class="modal">
+<div class="edit-stories-editable modal" *ngIf="editablePoint">
 
-    <h2>{{editablePoint.title}}</h2>
+  <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
 
-    <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <md-input-container>
 
-      <div class="form-group">
-        <md-input-container>
+        <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="editablePoint.title"
+               name="title" required>
+        <md-hint>
+          Interesting title of your story
+        </md-hint>
+      </md-input-container>
+    </div>
+    <div class="form-group">
+      <md-input-container>
 
-          <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="editablePoint.title"
-                 name="title" required>
-          <md-hint>
-            Interesting title of your story
-          </md-hint>
-        </md-input-container>
-      </div>
-      <div class="form-group">
+        <textarea mdInput placeholder="Story title" [(ngModel)]="editablePoint.body"
+               name="title"></textarea>
+        <md-hint>
+          Some little story about this location
+        </md-hint>
+      </md-input-container>
+    </div>
+    <div class="form-group">
 
-        <div class="coordinates">
-          Point coords: {{editablePoint.location.point.lat}}; {{editablePoint.location.point.lng}}
+      <md-input-container>
+
+        <input mdInput placeholder="Change point address" [mdAutocomplete]="auto" [formControl]="pointControl">
+
+      </md-input-container>
+      <md-autocomplete #auto="mdAutocomplete" [displayWith]="setPoint" md-item-text="item.formatted_address">
+        <md-option *ngFor="let state of pointOptions | async" [value]="state">
+          {{ state.formatted_address }}
+        </md-option>
+      </md-autocomplete>
+    </div>
+
+    <div class="image-block">
+      <div class="img-container" *ngFor="let image of editablePoint.files">
+        <div class="location" *ngIf="image.geo && image.geo.lat">
+          <md-icon>room</md-icon>
         </div>
 
-        <md-input-container>
-
-          <input mdInput placeholder="Point coordinates" [mdAutocomplete]="auto" [formControl]="pointControl">
-
-          <md-hint>
-            Enter address where your trip starts
-            {{state}}
-          </md-hint>
-        </md-input-container>
-        <md-autocomplete #auto="mdAutocomplete" [displayWith]="setPoint" md-item-text="item.formatted_address">
-          <md-option *ngFor="let state of pointOptions | async" [value]="state">
-            {{ state.formatted_address }}
-          </md-option>
-        </md-autocomplete>
+        <img src="{{image.url}}"  name="path" height="70" width="90">
+        <a (click)="removeFile(image)" class="remove">
+          <md-icon>close</md-icon>
+        </a>
       </div>
+    </div>
+    <br/>
+    <input type="file" ng2FileSelect [uploader]="uploader" multiple/><br/>
 
-      <div class="image-block">
-        <div class="img-container" *ngFor="let image of editablePoint.files">
+    <br/>
+    <br/>
 
-          <img src="{{'http://localhost:4040' + '/' + image.path}}"  name="path" height="70" width="90">
-          <a (click)="removeFile(image)">X</a>
-        </div>
-      </div>
-      <input type="file" ng2FileSelect [uploader]="uploader" multiple/><br/>
+    <div class="form-actions">
+      <button type="submit" md-raised-button>Save</button>
+    </div>
+  </form>
 
-
-      <div class="form-actions">
-        <button type="submit" md-raised-button>Save</button>
-      </div>
-    </form>
-
-  </div>
 </div>

@@ -101,7 +101,8 @@ export class EditStoriesComponent implements OnInit {
     this.uploader.onSuccessItem = (file, item) => {
       try {
         const fileItem = JSON.parse(item);
-        this.model.images.push(fileItem);
+        fileItem.url = `${API_URL}/` + fileItem.path;
+        this.editablePoint.files.push(fileItem);
       } catch (e) {
 
       }
@@ -140,6 +141,7 @@ export class EditStoriesComponent implements OnInit {
     let story = this.storyRes.save(this.model).subscribe((ret: IStory) => {
       console.log('is correct', ret._id);
       // this.router.navigate(['/stories/' + ret._id]);
+      this.editablePoint = null;
     });
     console.info(story);
   }
@@ -149,6 +151,10 @@ export class EditStoriesComponent implements OnInit {
     console.log('MODEL', model);
     this.initEditableForm();
     this.editablePoint = model;
+    this.editablePoint.files = this.editablePoint.files.map(file => {
+      file.url = `${API_URL}/` + file.path;
+      return file;
+    });
   }
 
   public onPointHover(point) {

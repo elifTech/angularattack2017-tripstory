@@ -54,6 +54,12 @@
     }
   }
 
+  .additional-info {
+    & > div {
+      float: left;
+    }
+  }
+
   .text-content {
     padding-left: 74px;
     position: absolute;
@@ -201,7 +207,7 @@
   border-top: 1px dashed #e0e0e0;
   margin-left: -10px;
   margin-right: -10px;
-  min-height: 290px;
+  min-height: 100px;
 
   .upload-photos, .add-new-points {
     position: absolute;
@@ -244,11 +250,11 @@
   }
 
   .add-new-points {
-    margin-top: 50px;
+    //margin-top: 10px;
   }
 
   .upload-photos {
-    margin-top: 130px;
+     margin-top: 30px;
   }
 }
 
@@ -257,7 +263,7 @@
   position: fixed;
   z-index: 10;
   left: 380px;
-  top: 120px;
+  top: 100px;
   background: #fff;
   border-radius: 5px;
   display: inline-block;
@@ -265,5 +271,4 @@
   margin: 10px 13px;
   overflow: hidden;
   box-shadow: 0 2px 3px rgba(0, 0, 0, .5);
-  min-height: 500px;
 }

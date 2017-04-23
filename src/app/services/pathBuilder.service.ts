@@ -63,7 +63,7 @@ export class PathBuilder {
       });
   }
 
-  public static getPathSegmentTypeInstance(type) {
+  public static getPathSegmentTypeInstance(type):any {
     switch (type) {
       case 'plane':
         return PlanePathSegment;

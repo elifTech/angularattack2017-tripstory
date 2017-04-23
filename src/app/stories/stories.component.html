@@ -1,0 +1,19 @@
+<div class="stories-page">
+
+
+
+  <a href="" [routerLink]="['/stories/new']">New story</a>
+
+
+  <div>
+    List
+  </div>
+
+
+  <div *ngFor="let story of storyList">
+    {{story.title}}
+  </div>
+
+  <router-outlet></router-outlet>
+
+</div>

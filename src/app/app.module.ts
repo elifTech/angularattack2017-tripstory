@@ -15,8 +15,11 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import { ResourceModule } from 'ngx-resource';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { MdGridListModule,
+  MdButtonModule, MdListModule, MdInputModule, MdRadioModule } from '@angular/material';
 
 import { Ng2UiAuthModule } from 'ng2-ui-auth';
 import { MyAuthConfig } from './config';
@@ -33,6 +36,8 @@ import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { LoginComponent } from './login';
+import { StoriesComponent } from './stories';
+import { NewStoriesComponent } from './stories/new';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
@@ -60,15 +65,23 @@ type StoreType = {
     AppComponent,
     AboutComponent,
     LoginComponent,
+    StoriesComponent,
+    NewStoriesComponent,
     HomeComponent,
     NoContentComponent,
     XLargeDirective
   ],
   imports: [ // import Angular's modules
+    MdGridListModule,
+    MdButtonModule,
+    MdListModule,
+    MdInputModule,
+    MdRadioModule,
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    ResourceModule.forRoot(),
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     Ng2UiAuthModule.forRoot(MyAuthConfig)
   ],

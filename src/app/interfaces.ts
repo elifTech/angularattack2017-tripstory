@@ -58,8 +58,8 @@ export interface IPathSegmentPoi {
 
 export interface IStory {
   _id?: string;
-  title: string;
-  subheader: string;
+  title?: string;
+  subheader?: string;
 
-  path: (IPathSegmentPoi | IPathSegmentRoad)[];
+  path?: (IPathSegmentPoi | IPathSegmentRoad)[];
 }

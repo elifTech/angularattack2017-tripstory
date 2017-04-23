@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.auth.authenticate('facebook')
       .subscribe({
         error: (err: any) => console.error(err),
-        complete: () => this.router.navigateByUrl('home')
+        complete: () => this.router.navigateByUrl('stories')
       });
   }
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.auth.authenticate('google')
       .subscribe({
         error: (err: any) => console.error(err),
-        complete: () => this.router.navigateByUrl('home')
+        complete: () => this.router.navigateByUrl('stories')
       });
   }
 }

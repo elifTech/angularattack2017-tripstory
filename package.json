@@ -86,6 +86,7 @@
     "jasmine-core": "^2.5.2",
     "ng2-file-upload": "^1.2.1",
     "ng2-ui-auth": "^6.1.4",
+    "ngx-resource": "^2.0.6",
     "reflect-metadata": "^0.1.10",
     "rxjs": "~5.3.0",
     "zone.js": "~0.8.5"

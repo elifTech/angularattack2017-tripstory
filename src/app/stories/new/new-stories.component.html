@@ -1,0 +1,27 @@
+<div class="stories-page">
+
+
+
+  <a href="" [routerLink]="['/stories']">Back</a>
+
+  <div>
+    New
+  </div>
+
+  <div class="container">
+    <h1>Hero Form</h1>
+    <form #heroForm="ngForm" name="newForm" (ngSubmit)="onSubmit()">
+      {{diagnostic}}
+      <div class="form-group">
+        <md-input-container>
+
+        <input mdInput placeholder="Story title" type="text" class="form-control" [(ngModel)]="model.title" name="title" required>
+
+        </md-input-container>
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+
+</div>

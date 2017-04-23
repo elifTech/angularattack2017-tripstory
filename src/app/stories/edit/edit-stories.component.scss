@@ -108,8 +108,13 @@
     }
   }
 
-  .line + .point {
+  .line + .path {
     border-top: 0 none;
+  }
+  .path {
+    position: relative;
+    min-height: 75px;
+    border-top: 1px dashed #e0e0e0;
   }
   .point {
     position: relative;
@@ -125,6 +130,24 @@
       content: ' ';
       top: 15px;
       left: 28px;
+    }
+    .point-content {
+      padding: 10px 5px 10px 75px;
+
+      .title {
+        color: #05b1e2;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        display: block;
+        font-size: 18px;
+      }
+      .location {
+        color: #666;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        display: block;
+        font-size: 12px;
+      }
     }
   }
 }

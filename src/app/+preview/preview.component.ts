@@ -196,7 +196,7 @@ export class PreviewComponent implements OnInit {
 
       path: [
         {
-          type: EPathSegmentType.POINT_OF_INTEREST,
+          pathType: EPathSegmentType.POINT_OF_INTEREST,
           location: {
             title: 'REYKJAVÍK',
             point: {
@@ -210,7 +210,7 @@ export class PreviewComponent implements OnInit {
           }
         },
         {
-          type: EPathSegmentType.ROAD,
+          pathType: EPathSegmentType.ROAD,
           travelType: ETravelModeType.WALKING,
           start: {
             lat: 55.5,

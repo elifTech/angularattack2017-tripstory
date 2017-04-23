@@ -2,31 +2,33 @@ export interface ITokenUser {
   _id: string;
 }
 
-const PATH_SEGMENT_TYPE = {
-  POINT_OF_INTEREST: 'poi',
-  ROAD: 'road'
-};
-
 export
 enum EPathSegmentType {
-  POINT_OF_INTEREST = PATH_SEGMENT_TYPE.POINT_OF_INTEREST,
-  ROAD = PATH_SEGMENT_TYPE.ROAD
+  POINT_OF_INTEREST,
+  ROAD
 }
 
-const TRAVEL_MODE_TYPE = {
-  DRIVING: 'driving',
-  WALKING: 'walking',
-  PLANE: 'plane',
-  FERRY: 'ferry',
+export
+const PATH_SEGMENT_TYPE = {
+  [EPathSegmentType.POINT_OF_INTEREST]: 'poi',
+  [EPathSegmentType.ROAD]: 'road'
 };
 
 export
 enum ETravelModeType {
-  DRIVING = TRAVEL_MODE_TYPE.DRIVING,
-  WALKING = TRAVEL_MODE_TYPE.WALKING,
-  PLANE = TRAVEL_MODE_TYPE.PLANE,
-  FERRY = TRAVEL_MODE_TYPE.FERRY
+  DRIVING,
+  WALKING,
+  PLANE,
+  FERRY
 }
+
+export
+const TRAVEL_MODE_TYPE = {
+  [ETravelModeType.DRIVING]: 'driving',
+  [ETravelModeType.WALKING]: 'walking',
+  [ETravelModeType.PLANE]: 'plane',
+  [ETravelModeType.FERRY]: 'ferry',
+};
 
 export interface IPoint {
   lat: number;

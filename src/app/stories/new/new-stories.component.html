@@ -21,9 +21,20 @@
 
         <md-input-container>
 
-        <input mdInput placeholder="Start point" type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>
+        <input mdInput placeholder="Start point" id="autocomplete" (keyup)="onChangeAddress(model.startPoint)" type="text" class="form-control" [(ngModel)]="model.startPoint.address" name="startPoint" required>
 
         </md-input-container>
+
+
+        <md-input-container>
+          <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+        </md-input-container>
+
+        <md-autocomplete #auto="mdAutocomplete">
+          <md-option *ngFor="let state of filteredStates | async" [value]="state">
+            {{ state }}
+          </md-option>
+        </md-autocomplete>
 
         <md-input-container>
 

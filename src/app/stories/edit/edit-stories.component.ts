@@ -84,4 +84,6 @@ export class EditStoriesComponent implements OnInit {
     });
     console.info(story);
   }
+
+  public onChangeAddress
 }

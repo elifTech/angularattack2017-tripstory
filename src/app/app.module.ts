@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import {
@@ -19,7 +19,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MdGridListModule,
-  MdButtonModule, MdListModule, MdInputModule, MdRadioModule } from '@angular/material';
+  MdButtonModule, MdListModule, MdInputModule, MdRadioModule, MdAutocompleteModule } from '@angular/material';
 
 import { Ng2UiAuthModule } from 'ng2-ui-auth';
 import { MyAuthConfig } from './config';
@@ -76,9 +76,11 @@ type StoreType = {
     MdListModule,
     MdInputModule,
     MdRadioModule,
+    MdAutocompleteModule,
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     FileUploadModule,
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),

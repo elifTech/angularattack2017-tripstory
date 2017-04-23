@@ -19,7 +19,8 @@ import { ITokenUser } from './interfaces';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './app.component.css'
+    './app.component.css',
+    '../../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css'
   ],
   template: `
     <!--nav>

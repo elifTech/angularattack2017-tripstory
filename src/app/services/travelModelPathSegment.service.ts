@@ -99,8 +99,23 @@ export class TravelModelPathSegment extends PathSegment {
     });
   }
 
+  distanceFrom(point, newLatLng) {
+    var EarthRadiusMeters = 6378137.0; // meters
+    var lat1 = point.lat();
+    var lon1 = point.lng();
+    var lat2 = newLatLng.lat();
+    var lon2 = newLatLng.lng();
+    var dLat = (lat2-lat1) * Math.PI / 180;
+    var dLon = (lon2-lon1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180 ) * Math.cos(lat2 * Math.PI / 180 ) *
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = EarthRadiusMeters * c;
+    return d;
+  }
+  
   GetPointAtDistance(polyline, metres) {
-    console.info(polyline)
     // some awkward special cases
     if (metres == 0) return polyline.getPath().getAt(0);
     if (metres < 0) return null;
@@ -109,7 +124,7 @@ export class TravelModelPathSegment extends PathSegment {
     var olddist=0;
     for (var i=1; (i < polyline.getPath().getLength() && dist < metres); i++) {
       olddist = dist;
-      dist += polyline.getPath().getAt(i).distanceFrom(polyline.getPath().getAt(i-1));
+      dist += this.distanceFrom(polyline.getPath().getAt(i), polyline.getPath().getAt(i-1));
     }
     if (dist < metres) {
       return null;

@@ -121,6 +121,9 @@ export class TravelModelPathSegment extends PathSegment {
   }
 
   moveMarker(fraction) {
+    if (!this.polyline) {
+      return;
+    }
     // const pathLength = Math.round(google.maps.geometry.spherical.computeLength(this.polyline.getPath().getArray()));
     const pathLength = Math.round(google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(this.path[0]), new google.maps.LatLng(this.path[1])));
     const pos = pathLength * fraction / 100;

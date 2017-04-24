@@ -99,12 +99,33 @@ export class TravelModelPathSegment extends PathSegment {
     });
   }
 
+  GetPointAtDistance(polyline, metres) {
+    console.info(polyline)
+    // some awkward special cases
+    if (metres == 0) return polyline.getPath().getAt(0);
+    if (metres < 0) return null;
+    if (polyline.getPath().getLength() < 2) return null;
+    var dist=0;
+    var olddist=0;
+    for (var i=1; (i < polyline.getPath().getLength() && dist < metres); i++) {
+      olddist = dist;
+      dist += polyline.getPath().getAt(i).distanceFrom(polyline.getPath().getAt(i-1));
+    }
+    if (dist < metres) {
+      return null;
+    }
+    var p1= polyline.getPath().getAt(i-2);
+    var p2= polyline.getPath().getAt(i-1);
+    var m = (metres-olddist)/(dist-olddist);
+    return new google.maps.LatLng( p1.lat() + (p2.lat()-p1.lat())*m, p1.lng() + (p2.lng()-p1.lng())*m);
+  }
+
   moveMarker(fraction) {
     // const pathLength = Math.round(google.maps.geometry.spherical.computeLength(this.polyline.getPath().getArray()));
     const pathLength = Math.round(google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(this.path[0]), new google.maps.LatLng(this.path[1])));
     const pos = pathLength * fraction / 100;
 
-    const p = this.polyline.GetPointAtDistance(pos);
+    const p = this.GetPointAtDistance(this.polyline, pos);
 
     this.marker.setPosition(p);
     this.map.setCenter(p);

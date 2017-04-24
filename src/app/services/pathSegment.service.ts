@@ -7,7 +7,7 @@ export class PathSegment {
   }
 
   moveMarker(fraction) {
-    const pos = google.maps.geometry.spherical.interpolate(this.path[0], this.path[1], fraction/100);
+    const pos = google.maps.geometry.spherical.interpolate(new google.maps.LatLng(this.path[0]), new google.maps.LatLng(this.path[1]), fraction/100);
     this.marker.setPosition(pos);
     this.map.panTo(pos);
     this.map.setCenter(pos);

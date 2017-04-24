@@ -131,24 +131,22 @@ export class PreviewComponent implements OnInit {
     let currentSectionIndex;
     let currentSection;
     let fraction;
-    this.sectionsBounds.forEach((item, index) => {
-       console.log(`${index}: item.top: ${item.top}, item.bottom: ${item.top + item.height}, scrollTop: ${scrollTop}`);
-      if (scrollTop >= (item.top) && scrollTop <= (item.top + item.height)) {
-        currentSectionIndex = index;
-        //  - this.sectionsBounds[0].topg
+    if (this.sectionsBounds) {
+      this.sectionsBounds.forEach((item, index) => {
+        if (scrollTop >= (item.top) && scrollTop <= (item.top + item.height)) {
+          currentSectionIndex = index;
+          //  - this.sectionsBounds[0].topg
+        }
+      });
+
+      if (currentSectionIndex !== undefined) {
+        currentSection = this.sectionsBounds[currentSectionIndex];
+        fraction = (scrollTop) / (currentSection.top + currentSection.height) * 100;
       }
-    });
 
-    if (currentSectionIndex !== undefined) {
-      currentSection = this.sectionsBounds[currentSectionIndex];
-      fraction = (scrollTop) / (currentSection.top + currentSection.height) * 100;
-    }
-
-    console.log(`currentSectionIndex: ${currentSectionIndex}, fraction: ${fraction}`);
-
-    if (currentSectionIndex !== undefined && fraction) {
-      console.info('moveMarker', currentSectionIndex, fraction)
-      this.scroller.pathSegments[currentSectionIndex].moveMarker(fraction);
+      if (currentSectionIndex !== undefined && fraction) {
+        this.scroller.pathSegments[currentSectionIndex].moveMarker(fraction);
+      }
     }
   }
 }
